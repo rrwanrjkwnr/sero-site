@@ -187,12 +187,172 @@
 
   /* TUB VISUAL */
   .tub-visual {
-    width: 200px;
+    width: 210px;
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
   }
-  .tub-visual svg { width: 100%; height: auto; }
+  .tub-wrap {
+    position: relative;
+    width: 210px;
+    height: 260px;
+  }
+  /* Shadow under tub */
+  .tub-shadow {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 22px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 75%);
+    border-radius: 50%;
+  }
+  /* Lid */
+  .tub-lid {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 52px;
+    background: linear-gradient(to bottom,
+      #f2efe9 0%, #e8e4dd 30%, #d8d4cc 60%, #ccc8c0 80%, #c4c0b8 100%);
+    border-radius: 50% 50% 48% 48% / 40% 40% 22% 22%;
+    box-shadow:
+      inset 0 6px 10px rgba(255,255,255,0.7),
+      inset 0 -4px 8px rgba(0,0,0,0.10),
+      0 3px 8px rgba(0,0,0,0.14);
+  }
+  .tub-lid::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 12px;
+    right: 12px;
+    height: 10px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0));
+    border-radius: 50%;
+  }
+  .tub-lid-rim {
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 14px;
+    background: linear-gradient(to bottom, #c0bcb4, #b8b4ac);
+    border-radius: 0 0 50% 50% / 0 0 80% 80%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+  }
+  /* Body */
+  .tub-body {
+    position: absolute;
+    top: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to right,
+      #d4d0c8 0%,
+      #e8e4de 8%,
+      #f0ede8 20%,
+      #f5f3ee 40%,
+      #f5f3ee 60%,
+      #eeebe5 80%,
+      #dedad2 92%,
+      #c8c4bc 100%);
+    border-radius: 4px 4px 50% 50% / 4px 4px 22px 22px;
+    box-shadow:
+      inset 4px 0 12px rgba(255,255,255,0.4),
+      inset -4px 0 12px rgba(0,0,0,0.08),
+      0 4px 12px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+  .tub-body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to right,
+      rgba(0,0,0,0.07) 0%,
+      rgba(0,0,0,0) 15%,
+      rgba(255,255,255,0.10) 30%,
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0) 75%,
+      rgba(0,0,0,0.09) 100%);
+  }
+  /* Label on the body */
+  .tub-label {
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    right: 14px;
+    bottom: 28px;
+    background: rgba(250,248,244,0.97);
+    border: 0.5px solid rgba(180,176,168,0.4);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    box-shadow: inset 0 1px 3px rgba(255,255,255,0.8);
+  }
+  .tub-label-brand {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 12px;
+    color: #0a0a0a;
+    text-indent: 12px;
+    line-height: 1;
+  }
+  .tub-label-line {
+    width: 80%;
+    height: 0.5px;
+    background: #c8c4bc;
+    margin: 1px 0;
+  }
+  .tub-label-sub {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5.5px;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+  }
+  .tub-label-flavor {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5px;
+    letter-spacing: 2px;
+    color: #aaa;
+    text-transform: uppercase;
+  }
+  .tub-label-tagline {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 9.5px;
+    color: #999;
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .tub-label-ings {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4.8px;
+    letter-spacing: 0.8px;
+    color: #bbb;
+    text-align: center;
+    line-height: 1.7;
+  }
+  /* Bottom ellipse */
+  .tub-bottom {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 22px;
+    background: linear-gradient(to bottom, #bab6ae, #aeaaa2);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
 
   .hero-stat-row {
     display: flex;
@@ -571,37 +731,28 @@
   <div class="hero-right">
     <!-- Round tub SVG -->
     <div class="tub-visual">
-      <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
-        <!-- Tub body -->
-        <ellipse cx="120" cy="240" rx="100" ry="18" fill="#d4d0c8"/>
-        <rect x="20" y="80" width="200" height="162" rx="4" fill="#ebe8e2"/>
-        <rect x="20" y="80" width="200" height="162" rx="4" fill="url(#tubGrad)"/>
-        <!-- Lid -->
-        <ellipse cx="120" cy="80" rx="100" ry="22" fill="#ddd9d2"/>
-        <ellipse cx="120" cy="76" rx="96" ry="18" fill="#e8e4de"/>
-        <ellipse cx="120" cy="74" rx="88" ry="14" fill="#f0ede8"/>
-        <!-- Label area -->
-        <rect x="30" y="100" width="180" height="130" rx="2" fill="#f5f3ee"/>
-        <!-- Label content -->
-        <text x="120" y="138" text-anchor="middle" font-family="Georgia,serif" font-size="32" font-weight="400" letter-spacing="12" fill="#0a0a0a">SERO</text>
-        <line x1="50" y1="148" x2="190" y2="148" stroke="#c8c4bc" stroke-width="0.5"/>
-        <text x="120" y="164" text-anchor="middle" font-family="Arial,sans-serif" font-size="6.5" letter-spacing="3.5" fill="#888">COGNITIVE PERFORMANCE</text>
-        <text x="120" y="178" text-anchor="middle" font-family="Arial,sans-serif" font-size="6" letter-spacing="2" fill="#aaa">NOOTROPIC DRINK MIX</text>
-        <text x="120" y="198" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#999" font-style="italic">Think clearly. Act decisively.</text>
-        <line x1="50" y1="207" x2="190" y2="207" stroke="#c8c4bc" stroke-width="0.5"/>
-        <text x="120" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="5.5" letter-spacing="1" fill="#bbb">Alpha GPC · Inositol · L-Theanine</text>
-        <text x="120" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="5.5" letter-spacing="1" fill="#bbb">Natural Caffeine · Ginseng · BioPerine</text>
-        <text x="120" y="248" text-anchor="middle" font-family="Arial,sans-serif" font-size="5.5" letter-spacing="2" fill="#ccc">20 SERVINGS · LUNAR FROST</text>
-        <!-- Gradient def -->
-        <defs>
-          <linearGradient id="tubGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="rgba(0,0,0,0.06)"/>
-            <stop offset="30%" stop-color="rgba(0,0,0,0)"/>
-            <stop offset="70%" stop-color="rgba(0,0,0,0)"/>
-            <stop offset="100%" stop-color="rgba(0,0,0,0.08)"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <div class="tub-wrap">
+        <div class="tub-shadow"></div>
+        <div class="tub-lid">
+          <div class="tub-lid-rim"></div>
+        </div>
+        <div class="tub-body">
+          <div class="tub-label">
+            <div class="tub-label-brand">SERO</div>
+            <div class="tub-label-line"></div>
+            <div class="tub-label-sub">Cognitive Performance</div>
+            <div class="tub-label-flavor">Nootropic Drink Mix</div>
+            <div class="tub-label-tagline">Think clearly. Act decisively.</div>
+            <div class="tub-label-line"></div>
+            <div class="tub-label-ings">
+              Alpha GPC · Inositol · L-Theanine<br>
+              Natural Caffeine · Ginseng · BioPerine
+            </div>
+            <div class="tub-label-flavor" style="margin-top:3px;color:#c8c4bc">20 SERVINGS · LUNAR FROST</div>
+          </div>
+        </div>
+        <div class="tub-bottom"></div>
+      </div>
     </div>
     <div class="hero-stat-row">
       <div class="hero-stat">
@@ -790,74 +941,3 @@
 <footer>
   <div class="footer-logo">SERO</div>
   <div class="footer-links">
-    <a href="#formula">Formula</a>
-    <a href="#science">Science</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#order">Order</a>
-    <a href="mailto:hello@serofocus.com">Contact</a>
-  </div>
-  <p class="footer-copy">© 2026 SERO · serofocus.com</p>
-</footer>
-
-<script type="text/javascript">
-/*<![CDATA[*/
-(function () {
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  if (window.ShopifyBuy) {
-    if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
-  } else { loadScript(); }
-  function loadScript() {
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = scriptURL;
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-    script.onload = ShopifyBuyInit;
-  }
-  function ShopifyBuyInit() {
-    var client = ShopifyBuy.buildClient({
-      domain: 'gzn7wn-pe.myshopify.com',
-      storefrontAccessToken: '636624b7b1a72fd0cb8dc5a366929844',
-    });
-    ShopifyBuy.UI.onReady(client).then(function (ui) {
-      ui.createComponent('product', {
-        id: '9472078840067',
-        node: document.getElementById('product-component-1780905710905'),
-        moneyFormat: '%24%7B%7Bamount%7D%7D',
-        options: {
-          product: {
-            buttonDestination: 'cart',
-            contents: { img: false, title: false, price: false },
-            text: { button: 'Add to cart' },
-            styles: {
-              product: { '@media (min-width: 601px)': { 'max-width': '100%', 'margin-left': '0' } }
-            }
-          },
-          cart: { text: { total: 'Subtotal', button: 'Checkout' } },
-          toggle: { styles: { toggle: { 'background-color': '#0a0a0a' }, iconPath: { fill: '#f5f3ee' } } }
-        }
-      });
-    });
-  }
-})();
-/*]]>*/
-</script>
-
-<script>
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1 });
-reveals.forEach(el => observer.observe(el));
-</script>
-</body>
-</ht
