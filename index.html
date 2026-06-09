@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SERO — Cognitive Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --bg-2: #0e0e0e;
+    --bg-3: #141414;
+    --border: #1e1e1e;
+    --border-mid: #2a2a2a;
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --text-dim: #444;
+    --gold: #c8a96e;
+    --gold-dim: #7a6540;
+    --font: 'Inter', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--mono);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border: 0.5px solid var(--gold-dim);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--mono);
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    border-right: 0.5px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.9s ease forwards 0.2s;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    font-family: var(--mono);
+  }
+  .hero-title {
+    font-size: clamp(56px, 7vw, 90px);
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    margin-bottom: 40px;
+    color: var(--text);
+  }
+  .hero-title .accent { color: var(--gold); font-weight: 200; }
+  .hero-divider {
+    width: 40px;
+    height: 0.5px;
+    background: var(--gold-dim);
+    margin-bottom: 32px;
+  }
+  .hero-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 400px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 20px; align-items: center; }
+  .btn-primary {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-family: var(--mono);
+    font-weight: 400;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #dfc080; }
+  .btn-ghost {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--text-dim);
+    padding-bottom: 2px;
+    font-family: var(--mono);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    background: var(--bg-2);
+    padding: 60px 40px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.5s;
+  }
+
+  /* TUB VISUAL — dark version */
+  .tub-wrap {
+    position: relative;
+    width: 210px;
+    height: 265px;
+  }
+  .tub-shadow {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.15) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+  }
+  .tub-lid {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 52px;
+    background: linear-gradient(to bottom, #1e1e1e 0%, #181818 40%, #121212 70%, #0e0e0e 100%);
+    border-radius: 50% 50% 48% 48% / 40% 40% 22% 22%;
+    border: 0.5px solid #2a2a2a;
+    box-shadow: inset 0 4px 8px rgba(200,169,110,0.05), 0 3px 10px rgba(0,0,0,0.5);
+  }
+  .tub-lid-rim {
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 14px;
+    background: linear-gradient(to bottom, #1a1a1a, #111);
+    border-radius: 0 0 50% 50% / 0 0 80% 80%;
+    border: 0.5px solid #222;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  }
+  .tub-body {
+    position: absolute;
+    top: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to right,
+      #0a0a0a 0%,
+      #111 10%,
+      #181818 25%,
+      #1e1e1e 50%,
+      #181818 75%,
+      #111 90%,
+      #0a0a0a 100%);
+    border-radius: 4px 4px 50% 50% / 4px 4px 22px 22px;
+    border: 0.5px solid #222;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+    overflow: hidden;
+  }
+  .tub-label {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    bottom: 26px;
+    background: rgba(14,14,14,0.98);
+    border: 0.5px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .tub-label-brand {
+    font-family: var(--mono);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 10px;
+    color: var(--text);
+    text-indent: 10px;
+    line-height: 1;
+  }
+  .tub-label-line {
+    width: 70%;
+    height: 0.5px;
+    background: var(--gold-dim);
+    margin: 2px 0;
+  }
+  .tub-label-sub {
+    font-family: var(--mono);
+    font-size: 5.5px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .tub-label-flavor {
+    font-family: var(--mono);
+    font-size: 4.8px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .tub-label-tagline {
+    font-family: var(--mono);
+    font-size: 5px;
+    color: #333;
+    margin-top: 2px;
+    letter-spacing: 1px;
+  }
+  .tub-label-ings {
+    font-family: var(--mono);
+    font-size: 4.5px;
+    letter-spacing: 0.8px;
+    color: #2a2a2a;
+    text-align: center;
+    line-height: 1.8;
+  }
+  .tub-bottom {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 22px;
+    background: linear-gradient(to bottom, #111, #0a0a0a);
+    border-radius: 50%;
+    border: 0.5px solid #1e1e1e;
+  }
+
+  .hero-stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    border: 0.5px solid var(--border);
+  }
+  .hero-stat {
+    text-align: center;
+    flex: 1;
+    padding: 20px 16px;
+    border-right: 0.5px solid var(--border);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--gold);
+    display: block;
+    letter-spacing: -0.5px;
+    font-family: var(--mono);
+  }
+  .hero-stat-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    background: var(--bg-2);
+    padding: 14px 0;
+    overflow: hidden;
+    border-bottom: 0.5px solid var(--border);
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards 0.9s;
+  }
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 26s linear infinite;
+  }
+  .marquee-track span {
+    font-size: 9px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0 32px;
+    font-family: var(--mono);
+  }
+  .marquee-track span.dot { color: var(--gold-dim); padding: 0; }
+
+  /* SECTIONS */
+  .section { padding: 120px 80px; border-bottom: 0.5px solid var(--border); }
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 200;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+  }
+  .section-title .accent { color: var(--gold); }
+  .section-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    max-width: 280px;
+    line-height: 1.7;
+    text-align: right;
+    font-family: var(--mono);
+    letter-spacing: 0.5px;
+  }
+
+  /* INGREDIENTS */
+  .ingr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--border);
+  }
+  .ingr-card {
+    padding: 40px 36px;
+    border-right: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .ingr-card:hover { background: var(--bg-3); }
+  .ingr-card:hover .ingr-name { color: var(--text); }
+  .ingr-card:hover .ingr-dose { color: var(--gold); }
+  .ingr-dose {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    transition: color 0.25s;
+  }
+  .ingr-name {
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 6px;
+    color: #bbb;
+    transition: color 0.25s;
+    letter-spacing: -0.3px;
+  }
+  .ingr-line {
+    width: 20px; height: 0.5px;
+    background: var(--border-mid);
+    margin: 16px 0;
+  }
+  .ingr-benefit {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* HOW IT WORKS */
+  .how-section {
+    background: var(--bg-2);
+    padding: 120px 80px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 80px;
+    border: 0.5px solid var(--border);
+  }
+  .how-step {
+    padding: 40px 32px;
+    border-right: 0.5px solid var(--border);
+    position: relative;
+  }
+  .how-step:last-child { border-right: none; }
+  .how-step-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  .how-step-bar {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .how-step-bar::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--gold);
+  }
+  .how-step:nth-child(1) .how-step-bar::after { width: 25%; }
+  .how-step:nth-child(2) .how-step-bar::after { width: 50%; }
+  .how-step:nth-child(3) .how-step-bar::after { width: 75%; }
+  .how-step:nth-child(4) .how-step-bar::after { width: 100%; }
+  .how-step-title {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+  }
+  .how-step-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    font-family: var(--mono);
+  }
+
+  /* TESTIMONIALS */
+  .testi-section {
+    padding: 120px 80px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--border);
+    margin-top: 80px;
+  }
+  .testi-card {
+    padding: 40px 36px;
+    border-right: 0.5px solid var(--border);
+  }
+  .testi-card:last-child { border-right: none; }
+  .testi-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 24px;
+  }
+  .star {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .testi-quote {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 28px;
+    color: #ccc;
+  }
+  .testi-author {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-family: var(--mono);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .cta-left .section-title { font-size: clamp(36px, 5vw, 60px); }
+  .cta-right { display: flex; flex-direction: column; gap: 0; }
+  .price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-bottom: 28px;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 0;
+  }
+  .price-big {
+    font-size: 52px;
+    font-weight: 200;
+    color: var(--text);
+    letter-spacing: -2px;
+    font-family: var(--mono);
+  }
+  .price-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: 1px;
+  }
+  .product-meta { display: flex; flex-direction: column; }
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+  }
+  .meta-label {
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+  .meta-val {
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .cta-btn {
+    width: 100%;
+    padding: 20px;
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-weight: 400;
+    transition: background 0.2s;
+    margin-top: 0;
+    display: block;
+  }
+  .cta-btn:hover { background: #dfc080; }
+  #shopify-buy-btn-wrapper { margin-top: 0; }
+  #shopify-buy-btn-wrapper .shopify-buy__btn-wrapper { width: 100%; }
+  #shopify-buy-btn-wrapper .shopify-buy__btn {
+    width: 100% !important;
+    padding: 20px !important;
+    background: var(--gold) !important;
+    color: #080808 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: 10px !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+    font-family: 'DM Mono', monospace !important;
+    font-weight: 400 !important;
+    transition: background 0.2s !important;
+    box-shadow: none !important;
+  }
+  #shopify-buy-btn-wrapper .shopify-buy__btn:hover { background: #dfc080 !important; }
+  #shopify-buy-btn-wrapper .shopify-buy__cart-toggle { display: none !important; }
+  .guarantee {
+    font-size: 9px;
+    color: var(--text-dim);
+    text-align: center;
+    letter-spacing: 1.5px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-2);
+    padding: 48px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--border);
+  }
+  .footer-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--text-muted);
+  }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--mono);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text-muted); }
+  .footer-copy {
+    font-size: 9px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: 1px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px 40px; border-right: none; border-bottom: 0.5px solid var(--border); }
+    .hero-right { min-height: 50vh; padding: 48px 24px; }
+    .section { padding: 80px 24px; }
+    .ingr-grid { grid-template-columns: 1fr; }
+    .how-section { padding: 80px 24px; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .testi-section { padding: 80px 24px; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 80px 24px; grid-template-columns: 1fr; }
+    footer { padding: 36px 24px; flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .section-sub { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">SERO</a>
+  <ul class="nav-links">
+    <li><a href="#formula">Formula</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <a href="#order" class="nav-cta">Order now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Nootropic drink mix · Lunar Frost · Formula 01</p>
+    <h1 class="hero-title">Your mind<br>is a<br><span class="accent">liability.</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Most men operate at 60% cognitive capacity. They call it normal. Seven clinically dosed ingredients. Zero proprietary blends. Zero excuses. SERO changes the ratio.</p>
+    <div class="hero-actions">
+      <a href="#order" class="btn-primary">Get SERO — $39</a>
+      <a href="#formula" class="btn-ghost">See the formula</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="tub-wrap">
+      <div class="tub-shadow"></div>
+      <div class="tub-lid">
+        <div class="tub-lid-rim"></div>
+      </div>
+      <div class="tub-body">
+        <div class="tub-label">
+          <div class="tub-label-brand">SERO</div>
+          <div class="tub-label-line"></div>
+          <div class="tub-label-sub">Cognitive Performance</div>
+          <div class="tub-label-flavor">Nootropic Drink Mix</div>
+          <div class="tub-label-tagline">Your mind is the asset.</div>
+          <div class="tub-label-line"></div>
+          <div class="tub-label-ings">
+            Alpha GPC · Inositol · L-Theanine<br>
+            Natural Caffeine · Ginseng · BioPerine
+          </div>
+          <div class="tub-label-flavor" style="margin-top:4px;color:#333">20 SERVINGS · LUNAR FROST</div>
+        </div>
+      </div>
+      <div class="tub-bottom"></div>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <span class="hero-stat-num">7</span>
+        <span class="hero-stat-label">Active ingredients</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">20</span>
+        <span class="hero-stat-label">Servings</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">0</span>
+        <span class="hero-stat-label">Prop. blends</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Alpha GPC 300mg</span><span class="dot">·</span>
+    <span>Inositol 600mg</span><span class="dot">·</span>
+    <span>Natural Caffeine 200mg</span><span class="dot">·</span>
+    <span>L-Theanine 100mg</span><span class="dot">·</span>
+    <span>Asian Ginseng 50mg</span><span class="dot">·</span>
+    <span>Black Pepper Extract 5mg</span><span class="dot">·</span>
+    <span>B Vitamins</span><span class="dot">·</span>
+    <span>No proprietary blends</span><span class="dot">·</span>
+    <span>Ships from US</span><span class="dot">·</span>
+    <span>Alpha GPC 300mg</span><span class="dot">·</span>
+    <span>Inositol 600mg</span><span class="dot">·</span>
+    <span>Natural Caffeine 200mg</span><span class="dot">·</span>
+    <span>L-Theanine 100mg</span><span class="dot">·</span>
+    <span>Asian Ginseng 50mg</span><span class="dot">·</span>
+    <span>Black Pepper Extract 5mg</span><span class="dot">·</span>
+    <span>B Vitamins</span><span class="dot">·</span>
+    <span>No proprietary blends</span><span class="dot">·</span>
+    <span>Ships from US</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- FORMULA -->
+<section class="section" id="formula">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-num">01 — Formula</p>
+      <h2 class="section-title">Every ingredient<br>has a <span class="accent">reason.</span></h2>
+    </div>
+    <p class="section-sub">Full doses. Full transparency. The stack most brands won't tell you about.</p>
+  </div>
+  <div class="ingr-grid reveal">
+    <div class="ingr-card">
+      <p class="ingr-dose">300mg</p>
+      <h3 class="ingr-name">Alpha GPC</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">Crosses the blood-brain barrier directly. Boosts acetylcholine — the neurotransmitter behind focus, memory, and learning speed.</p>
+    </div>
+    <div class="ingr-card">
+      <p class="ingr-dose">600mg</p>
+      <h3 class="ingr-name">Inositol</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">Rarely dosed this high in a nootropic. Supports stress resilience, serotonin signalling, and sustained mental clarity under pressure.</p>
+    </div>
+    <div class="ingr-card" style="border-right:none">
+      <p class="ingr-dose">200mg</p>
+      <h3 class="ingr-name">Natural Caffeine</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">Sourced from green tea. Slower absorption than synthetic caffeine — clean, sustained energy without the spike or crash.</p>
+    </div>
+    <div class="ingr-card">
+      <p class="ingr-dose">100mg</p>
+      <h3 class="ingr-name">L-Theanine</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">Pairs with caffeine to smooth the curve. Increases alpha wave activity — calm, locked-in attention with no edge or anxiety.</p>
+    </div>
+    <div class="ingr-card">
+      <p class="ingr-dose">50mg</p>
+      <h3 class="ingr-name">Asian Ginseng</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">Supports cognitive function under stress and improves cerebral blood flow. Keeps you sharp when it matters most.</p>
+    </div>
+    <div class="ingr-card" style="border-right:none">
+      <p class="ingr-dose">5mg</p>
+      <h3 class="ingr-name">Black Pepper Extract</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">BioPerine. Increases bioavailability of every other ingredient in the stack by up to 20x. Small dose, massive effect.</p>
+    </div>
+    <div class="ingr-card" style="grid-column: span 3; border-bottom:none; border-right:none">
+      <p class="ingr-dose">Full RDA</p>
+      <h3 class="ingr-name">B Vitamins (B3 · B6 · B12)</h3>
+      <div class="ingr-line"></div>
+      <p class="ingr-benefit">Essential cofactors for neurotransmitter synthesis and energy metabolism. Most people are deficient and don't know it. You won't be.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="science">
+  <div class="section-header reveal" style="border-bottom-color: var(--border);">
+    <div>
+      <p class="section-num">02 — Science</p>
+      <h2 class="section-title">How it <span class="accent">works</span></h2>
+    </div>
+    <p class="section-sub">Designed to work in layers — immediate, sustained, and compounding.</p>
+  </div>
+  <div class="how-grid reveal">
+    <div class="how-step">
+      <p class="how-step-num">00 — 20 min</p>
+      <div class="how-step-bar"></div>
+      <h3 class="how-step-title">Caffeine + Theanine activate</h3>
+      <p class="how-step-desc">Clean energy from green tea kicks in. Alpha waves rise. Sharp and calm — not wired.</p>
+    </div>
+    <div class="how-step">
+      <p class="how-step-num">30 — 60 min</p>
+      <div class="how-step-bar"></div>
+      <h3 class="how-step-title">Alpha GPC elevates focus</h3>
+      <p class="how-step-desc">Acetylcholine rises. Deep work becomes easier. BioPerine maximises absorption across the stack.</p>
+    </div>
+    <div class="how-step">
+      <p class="how-step-num">2 — 4 hours</p>
+      <div class="how-step-bar"></div>
+      <h3 class="how-step-title">Inositol holds the line</h3>
+      <p class="how-step-desc">Stress stays managed. Serotonin signalling stays smooth. No 2pm crash, no mental fog.</p>
+    </div>
+    <div class="how-step" style="border-right:none">
+      <p class="how-step-num">Daily use</p>
+      <div class="how-step-bar"></div>
+      <h3 class="how-step-title">Ginseng compounds</h3>
+      <p class="how-step-desc">Cerebral blood flow improves. Cognitive output builds. More effective the longer you run it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="testi-section" id="reviews">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-num">03 — Reviews</p>
+      <h2 class="section-title">What they're<br><span class="accent">saying.</span></h2>
+    </div>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="testi-quote">"I've tried every nootropic stack out there. SERO is the first one where I actually notice a real difference by week two."</p>
+      <p class="testi-author">Jake M. — New York</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="testi-quote">"The fact that they show every dose is what sold me. Most brands hide everything in proprietary blends. SERO doesn't."</p>
+      <p class="testi-author">Marcus T. — Los Angeles</p>
+    </div>
+    <div class="testi-card" style="border-right:none">
+      <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="testi-quote">"My morning output has genuinely changed. Coffee alone was never going to do what SERO does."</p>
+      <p class="testi-author">Ryan K. — Chicago</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER CTA -->
+<section class="cta-section" id="order">
+  <div class="cta-left reveal">
+    <p class="section-num">04 — Order</p>
+    <h2 class="section-title">Your brain<br>is the asset.<br><span class="accent">Treat it<br>like one.</span></h2>
+  </div>
+  <div class="cta-right reveal">
+    <div class="price-display">
+      <span class="price-big">$39</span>
+      <span class="price-sub">USD · 20 servings</span>
+    </div>
+    <div class="product-meta">
+      <div class="meta-row"><span class="meta-label">Flavour</span><span class="meta-val">Lunar Frost</span></div>
+      <div class="meta-row"><span class="meta-label">Servings</span><span class="meta-val">20 · ~$1.95/day</span></div>
+      <div class="meta-row"><span class="meta-label">Fulfillment</span><span class="meta-val">Ships from US · 3–5 days</span></div>
+      <div class="meta-row"><span class="meta-label">Shipping</span><span class="meta-val">Free over $60 USD</span></div>
+    </div>
+    <div id="shopify-buy-btn-wrapper">
+      <div id='product-component-1780905710905'></div>
+      <a href="https://gzn7wn-pe.myshopify.com" id="fallback-buy-btn" class="cta-btn" style="display:block;text-align:center;text-decoration:none;">Add to Cart — $39</a>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var shopifyDiv = document.getElementById('product-component-1780905710905');
+        var fallback = document.getElementById('fallback-buy-btn');
+        var check = setInterval(function() {
+          if (shopifyDiv && shopifyDiv.children.length > 0) {
+            fallback.style.display = 'none';
+            clearInterval(check);
+          }
+        }, 500);
+        setTimeout(function() { clearInterval(check); }, 6000);
+      });
+    </script>
+    <p class="guarantee">30-day money back guarantee · No questions asked</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SERO</div>
+  <div class="footer-links">
+    <a href="#formula">Formula</a>
+    <a href="#science">Science</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#order">Order</a>
+    <a href="mailto:hello@serofocus.com">Contact</a>
+  </div>
+  <p class="footer-copy">© 2025 SERO · All rights reserved</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
