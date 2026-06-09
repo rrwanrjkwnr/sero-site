@@ -931,8 +931,24 @@
       <div class="meta-row"><span class="meta-label">Shipping</span><span class="meta-val">Free over $60 USD</span></div>
     </div>
     <div id="shopify-buy-btn-wrapper">
+      <!-- Paste your Shopify Buy Button embed code inside this div to replace the button below -->
       <div id='product-component-1780905710905'></div>
+      <a href="https://gzn7wn-pe.myshopify.com" id="fallback-buy-btn" class="cta-btn" style="display:block;text-align:center;text-decoration:none;">Add to Cart — $39</a>
     </div>
+    <script>
+      // Hide fallback button once Shopify loads
+      document.addEventListener('DOMContentLoaded', function() {
+        var shopifyDiv = document.getElementById('product-component-1780905710905');
+        var fallback = document.getElementById('fallback-buy-btn');
+        var check = setInterval(function() {
+          if (shopifyDiv && shopifyDiv.children.length > 0) {
+            fallback.style.display = 'none';
+            clearInterval(check);
+          }
+        }, 500);
+        setTimeout(function() { clearInterval(check); }, 6000);
+      });
+    </script>
     <p class="guarantee">30-day money back guarantee · No questions asked</p>
   </div>
 </section>
@@ -941,3 +957,33 @@
 <footer>
   <div class="footer-logo">SERO</div>
   <div class="footer-links">
+    <a href="#formula">Formula</a>
+    <a href="#science">Science</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#order">Order</a>
+    <a href="mailto:hello@serofocus.com">Contact</a>
+  </div>
+  <p class="footer-copy">© 2025 SERO · All rights reserved</p>
+</footer>
+
+<script>
+  // Nav scroll border
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
