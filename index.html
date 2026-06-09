@@ -6,21 +6,22 @@
 <title>SERO — Cognitive Performance</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080808;
-    --bg-2: #0e0e0e;
-    --bg-3: #141414;
-    --border: #1e1e1e;
-    --border-mid: #2a2a2a;
-    --text: #f0f0f0;
-    --text-muted: #888;
-    --text-dim: #444;
-    --gold: #c8a96e;
-    --gold-dim: #7a6540;
+    --bg: #ffffff;
+    --bg-2: #f6f4ff;
+    --bg-3: #eeeaff;
+    --border: #e8e4f8;
+    --border-dark: #d0c8f0;
+    --text: #0f0a20;
+    --text-muted: #3a2870;
+    --text-dim: #9080c0;
+    --accent: #1a40d0;
+    --moon: #7010b0;
     --font: 'Inter', system-ui, sans-serif;
     --mono: 'DM Mono', monospace;
+    --grad: linear-gradient(90deg, #1a40d0, #8010c0);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,6 +33,9 @@
     font-weight: 300;
     overflow-x: hidden;
   }
+  .hero-right {
+    background-image: radial-gradient(ellipse at 60% 40%, rgba(100,60,220,0.05) 0%, transparent 70%);
+  }
 
   /* NAV */
   nav {
@@ -41,20 +45,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 60px;
-    background: rgba(8,8,8,0.92);
+    padding: 0 60px;
+    height: 56px;
+    background: rgba(255,255,255,0.94);
     backdrop-filter: blur(16px);
-    border-bottom: 0.5px solid transparent;
-    transition: border-color 0.3s;
+    border-bottom: 0.5px solid var(--border);
   }
-  nav.scrolled { border-bottom-color: var(--border); }
   .nav-logo {
     font-family: var(--mono);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
-    letter-spacing: 6px;
-    color: var(--text);
+    letter-spacing: 8px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-decoration: none;
+    text-indent: 8px;
   }
   .nav-links {
     display: flex;
@@ -65,33 +72,33 @@
     font-size: 10px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--text-dim);
     text-decoration: none;
     font-family: var(--mono);
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover { color: var(--moon); }
   .nav-cta {
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 10px 22px;
-    border: 0.5px solid var(--gold-dim);
-    background: transparent;
-    color: var(--gold);
+    padding: 8px 20px;
+    border: none;
+    background: var(--grad);
+    color: #fff;
     cursor: pointer;
     text-decoration: none;
     font-family: var(--mono);
-    transition: all 0.2s;
+    transition: opacity 0.2s;
   }
-  .nav-cta:hover { background: var(--gold); color: var(--bg); }
+  .nav-cta:hover { opacity: 0.85; }
 
   /* HERO */
   .hero {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding-top: 80px;
+    padding-top: 56px;
     border-bottom: 0.5px solid var(--border);
   }
   .hero-left {
@@ -102,7 +109,7 @@
     border-right: 0.5px solid var(--border);
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeUp 0.9s ease forwards 0.2s;
+    animation: fadeUp 0.8s ease forwards 0.2s;
   }
   .hero-eyebrow {
     font-size: 10px;
@@ -113,19 +120,22 @@
     font-family: var(--mono);
   }
   .hero-title {
-    font-size: clamp(56px, 7vw, 90px);
-    font-weight: 200;
-    line-height: 0.95;
-    letter-spacing: -2px;
+    font-size: clamp(56px, 7vw, 92px);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -3px;
     margin-bottom: 40px;
-    color: var(--text);
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  .hero-title .accent { color: var(--gold); font-weight: 200; }
   .hero-divider {
     width: 40px;
-    height: 0.5px;
-    background: var(--gold-dim);
+    height: 2px;
+    background: var(--grad);
     margin-bottom: 32px;
+    border: none;
   }
   .hero-desc {
     font-size: 14px;
@@ -135,49 +145,49 @@
     margin-bottom: 48px;
     font-weight: 300;
   }
-  .hero-actions { display: flex; gap: 20px; align-items: center; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
   .btn-primary {
     font-size: 10px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     padding: 16px 32px;
-    background: var(--gold);
-    color: var(--bg);
+    background: var(--grad);
+    color: #fff;
     border: none;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
     font-family: var(--mono);
     font-weight: 400;
-    transition: all 0.2s;
+    transition: opacity 0.2s;
   }
-  .btn-primary:hover { background: #dfc080; }
+  .btn-primary:hover { opacity: 0.85; }
   .btn-ghost {
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-dim);
     text-decoration: none;
-    border-bottom: 0.5px solid var(--text-dim);
+    border-bottom: 0.5px solid var(--border-dark);
     padding-bottom: 2px;
     font-family: var(--mono);
     transition: color 0.2s, border-color 0.2s;
   }
-  .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+  .btn-ghost:hover { color: var(--moon); border-color: var(--moon); }
 
   .hero-right {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 60px;
-    background: var(--bg-2);
+    gap: 40px;
+    background: #1a1828;
     padding: 60px 40px;
     opacity: 0;
-    animation: fadeIn 1s ease forwards 0.5s;
+    animation: fadeIn 1s ease forwards 0.4s;
   }
 
-  /* TUB VISUAL — dark version */
+  /* TUB VISUAL */
   .tub-wrap {
     position: relative;
     width: 210px;
@@ -190,7 +200,7 @@
     transform: translateX(-50%);
     width: 170px;
     height: 20px;
-    background: radial-gradient(ellipse, rgba(200,169,110,0.15) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(ellipse, rgba(80,40,180,0.18) 0%, rgba(0,0,0,0) 70%);
     border-radius: 50%;
   }
   .tub-lid {
@@ -200,10 +210,25 @@
     transform: translateX(-50%);
     width: 200px;
     height: 52px;
-    background: linear-gradient(to bottom, #1e1e1e 0%, #181818 40%, #121212 70%, #0e0e0e 100%);
+    background: linear-gradient(120deg, #ece8ff 0%, #f5f3ff 50%, #e8e4ff 100%);
     border-radius: 50% 50% 48% 48% / 40% 40% 22% 22%;
-    border: 0.5px solid #2a2a2a;
-    box-shadow: inset 0 4px 8px rgba(200,169,110,0.05), 0 3px 10px rgba(0,0,0,0.5);
+    border: 0.5px solid #c8c0f0;
+    box-shadow: 0 3px 16px rgba(100,60,200,0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  .tub-lid::after {
+    content: 'SERO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 6px;
+    background: linear-gradient(90deg, #1a40d0, #8010c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-indent: 6px;
   }
   .tub-lid-rim {
     position: absolute;
@@ -212,10 +237,11 @@
     transform: translateX(-50%);
     width: 200px;
     height: 14px;
-    background: linear-gradient(to bottom, #1a1a1a, #111);
+    background: linear-gradient(120deg, #d8d0f8 0%, #ece8ff 100%);
     border-radius: 0 0 50% 50% / 0 0 80% 80%;
-    border: 0.5px solid #222;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    border: 0.5px solid #c0b8e8;
+    border-top: none;
+    box-shadow: 0 3px 8px rgba(100,60,200,0.12);
   }
   .tub-body {
     position: absolute;
@@ -224,27 +250,20 @@
     transform: translateX(-50%);
     width: 200px;
     height: 200px;
-    background: linear-gradient(to right,
-      #0a0a0a 0%,
-      #111 10%,
-      #181818 25%,
-      #1e1e1e 50%,
-      #181818 75%,
-      #111 90%,
-      #0a0a0a 100%);
+    background: linear-gradient(160deg, #f8f6ff 0%, #ffffff 50%, #f4f0ff 100%);
     border-radius: 4px 4px 50% 50% / 4px 4px 22px 22px;
-    border: 0.5px solid #222;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+    border: 0.5px solid #d0c8f0;
+    box-shadow: 0 4px 24px rgba(100,60,200,0.14), inset -8px 0 20px rgba(200,180,255,0.12);
     overflow: hidden;
   }
   .tub-label {
     position: absolute;
-    top: 10px;
-    left: 12px;
-    right: 12px;
-    bottom: 26px;
-    background: rgba(14,14,14,0.98);
-    border: 0.5px solid #2a2a2a;
+    top: 8px;
+    left: 10px;
+    right: 10px;
+    bottom: 24px;
+    background: rgba(255,255,255,0.7);
+    border: 0.5px solid rgba(160,130,240,0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -252,85 +271,93 @@
     gap: 4px;
   }
   .tub-label-brand {
-    font-family: var(--mono);
-    font-size: 24px;
-    font-weight: 400;
-    letter-spacing: 10px;
-    color: var(--text);
-    text-indent: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    background: linear-gradient(90deg, #1a40d0, #8010c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-indent: 8px;
     line-height: 1;
   }
   .tub-label-line {
     width: 70%;
     height: 0.5px;
-    background: var(--gold-dim);
-    margin: 2px 0;
+    background: linear-gradient(90deg, #2050e0, #9020c0);
+    margin: 3px 0;
+    opacity: 0.4;
   }
   .tub-label-sub {
-    font-family: var(--mono);
+    font-family: 'DM Mono', monospace;
     font-size: 5.5px;
     letter-spacing: 3px;
-    color: var(--gold);
+    color: #5040a0;
     text-transform: uppercase;
   }
   .tub-label-flavor {
-    font-family: var(--mono);
+    font-family: 'DM Mono', monospace;
     font-size: 4.8px;
     letter-spacing: 2px;
-    color: var(--text-dim);
+    color: #9080c0;
     text-transform: uppercase;
   }
   .tub-label-tagline {
-    font-family: var(--mono);
+    font-family: 'Inter', sans-serif;
     font-size: 5px;
-    color: #333;
+    color: #a090c8;
     margin-top: 2px;
-    letter-spacing: 1px;
+    font-style: italic;
   }
   .tub-label-ings {
-    font-family: var(--mono);
+    font-family: 'DM Mono', monospace;
     font-size: 4.5px;
     letter-spacing: 0.8px;
-    color: #2a2a2a;
+    color: #c0b0e0;
     text-align: center;
     line-height: 1.8;
   }
   .tub-bottom {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
     height: 22px;
-    background: linear-gradient(to bottom, #111, #0a0a0a);
+    background: linear-gradient(90deg, #d8d0f8, #ece8ff);
     border-radius: 50%;
-    border: 0.5px solid #1e1e1e;
+    border: 0.5px solid #c8c0f0;
   }
 
   .hero-stat-row {
     display: flex;
-    justify-content: center;
-    gap: 0;
     width: 100%;
     border: 0.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
   }
   .hero-stat {
     text-align: center;
     flex: 1;
-    padding: 20px 16px;
+    padding: 18px 12px;
     border-right: 0.5px solid var(--border);
+    background: var(--bg);
   }
   .hero-stat:last-child { border-right: none; }
   .hero-stat-num {
-    font-size: 24px;
-    font-weight: 200;
-    color: var(--gold);
+    font-size: 22px;
+    font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
-    letter-spacing: -0.5px;
     font-family: var(--mono);
+    letter-spacing: -0.5px;
   }
   .hero-stat-label {
-    font-size: 9px;
+    font-size: 8px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--text-dim);
@@ -341,12 +368,13 @@
 
   /* MARQUEE */
   .marquee-wrap {
-    background: var(--bg-2);
-    padding: 14px 0;
+    background: var(--grad);
+    border-top: none;
+    border-bottom: none;
+    padding: 12px 0;
     overflow: hidden;
-    border-bottom: 0.5px solid var(--border);
     opacity: 0;
-    animation: fadeIn 0.8s ease forwards 0.9s;
+    animation: fadeIn 0.8s ease forwards 0.8s;
   }
   .marquee-track {
     display: flex;
@@ -357,11 +385,11 @@
     font-size: 9px;
     letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: var(--text-dim);
-    padding: 0 32px;
+    color: rgba(255,255,255,0.75);
+    padding: 0 28px;
     font-family: var(--mono);
   }
-  .marquee-track span.dot { color: var(--gold-dim); padding: 0; }
+  .marquee-track span.dot { color: rgba(255,255,255,0.35); padding: 0; }
 
   /* SECTIONS */
   .section { padding: 120px 80px; border-bottom: 0.5px solid var(--border); }
@@ -369,29 +397,32 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 80px;
-    padding-bottom: 40px;
+    margin-bottom: 64px;
+    padding-bottom: 32px;
     border-bottom: 0.5px solid var(--border);
   }
   .section-num {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 3px;
-    color: var(--text-dim);
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 16px;
+    text-transform: uppercase;
   }
   .section-title {
     font-size: clamp(32px, 4.5vw, 52px);
-    font-weight: 200;
-    line-height: 1.1;
-    letter-spacing: -1px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
     color: var(--text);
   }
-  .section-title .accent { color: var(--gold); }
   .section-sub {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-dim);
-    max-width: 280px;
+    max-width: 260px;
     line-height: 1.7;
     text-align: right;
     font-family: var(--mono);
@@ -402,44 +433,48 @@
   .ingr-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
     border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
   }
   .ingr-card {
-    padding: 40px 36px;
+    padding: 36px;
     border-right: 0.5px solid var(--border);
     border-bottom: 0.5px solid var(--border);
-    transition: background 0.25s;
+    transition: background 0.2s;
     cursor: default;
+    background: var(--bg);
   }
-  .ingr-card:hover { background: var(--bg-3); }
-  .ingr-card:hover .ingr-name { color: var(--text); }
-  .ingr-card:hover .ingr-dose { color: var(--gold); }
+  .ingr-card:hover { background: var(--bg-2); }
   .ingr-dose {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 2px;
-    color: var(--text-dim);
-    margin-bottom: 16px;
-    transition: color 0.25s;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    display: inline-block;
   }
   .ingr-name {
-    font-size: 22px;
-    font-weight: 300;
+    font-size: 20px;
+    font-weight: 600;
     margin-bottom: 6px;
-    color: #bbb;
-    transition: color 0.25s;
+    color: var(--text);
     letter-spacing: -0.3px;
   }
   .ingr-line {
-    width: 20px; height: 0.5px;
-    background: var(--border-mid);
-    margin: 16px 0;
+    width: 28px; height: 2px;
+    background: var(--grad);
+    margin: 14px 0;
+    border: none;
   }
   .ingr-benefit {
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.65;
   }
 
   /* HOW IT WORKS */
@@ -451,14 +486,14 @@
   .how-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    margin-top: 80px;
     border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
   }
   .how-step {
-    padding: 40px 32px;
+    padding: 36px 28px;
     border-right: 0.5px solid var(--border);
-    position: relative;
+    background: var(--bg);
   }
   .how-step:last-child { border-right: none; }
   .how-step-num {
@@ -466,36 +501,38 @@
     font-size: 9px;
     letter-spacing: 2.5px;
     color: var(--text-dim);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
   }
   .how-step-bar {
     width: 100%;
-    height: 1px;
+    height: 3px;
     background: var(--border);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     position: relative;
+    border-radius: 2px;
     overflow: hidden;
   }
   .how-step-bar::after {
     content: '';
     position: absolute;
     left: 0; top: 0; bottom: 0;
-    background: var(--gold);
+    background: var(--grad);
+    border-radius: 2px;
   }
   .how-step:nth-child(1) .how-step-bar::after { width: 25%; }
   .how-step:nth-child(2) .how-step-bar::after { width: 50%; }
   .how-step:nth-child(3) .how-step-bar::after { width: 75%; }
   .how-step:nth-child(4) .how-step-bar::after { width: 100%; }
   .how-step-title {
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     line-height: 1.3;
-    letter-spacing: -0.2px;
   }
   .how-step-desc {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-dim);
     line-height: 1.7;
     font-family: var(--mono);
@@ -505,35 +542,37 @@
   .testi-section {
     padding: 120px 80px;
     border-bottom: 0.5px solid var(--border);
+    background: var(--bg);
   }
   .testi-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
     border: 0.5px solid var(--border);
-    margin-top: 80px;
+    border-radius: 8px;
+    overflow: hidden;
   }
   .testi-card {
-    padding: 40px 36px;
+    padding: 36px;
     border-right: 0.5px solid var(--border);
+    background: var(--bg-2);
   }
   .testi-card:last-child { border-right: none; }
   .testi-stars {
     display: flex;
     gap: 3px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
   .star {
     width: 8px; height: 8px;
-    background: var(--gold);
+    background: var(--grad);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   }
   .testi-quote {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 300;
     line-height: 1.7;
-    margin-bottom: 28px;
-    color: #ccc;
+    margin-bottom: 24px;
+    color: var(--text-muted);
   }
   .testi-author {
     font-size: 9px;
@@ -550,26 +589,29 @@
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: start;
+    border-bottom: 0.5px solid var(--border);
   }
   .cta-left .section-title { font-size: clamp(36px, 5vw, 60px); }
-  .cta-right { display: flex; flex-direction: column; gap: 0; }
+  .cta-right { display: flex; flex-direction: column; }
   .price-display {
     display: flex;
     align-items: baseline;
     gap: 10px;
-    padding-bottom: 28px;
-    border-bottom: 0.5px solid var(--border);
-    margin-bottom: 0;
+    padding-bottom: 24px;
+    border-bottom: 0.5px solid var(--border-dark);
   }
   .price-big {
     font-size: 52px;
-    font-weight: 200;
-    color: var(--text);
+    font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: -2px;
     font-family: var(--mono);
   }
   .price-sub {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-dim);
     font-family: var(--mono);
     letter-spacing: 1px;
@@ -579,16 +621,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 0;
+    padding: 13px 0;
     border-bottom: 0.5px solid var(--border);
     font-size: 12px;
   }
   .meta-label {
     color: var(--text-dim);
-    letter-spacing: 1px;
     font-family: var(--mono);
     font-size: 10px;
     text-transform: uppercase;
+    letter-spacing: 1px;
   }
   .meta-val {
     color: var(--text-muted);
@@ -598,8 +640,8 @@
   .cta-btn {
     width: 100%;
     padding: 20px;
-    background: var(--gold);
-    color: var(--bg);
+    background: linear-gradient(90deg, #1a40d0, #8010c0);
+    color: #fff;
     border: none;
     font-size: 10px;
     letter-spacing: 3px;
@@ -607,18 +649,18 @@
     cursor: pointer;
     font-family: var(--mono);
     font-weight: 400;
-    transition: background 0.2s;
-    margin-top: 0;
+    transition: opacity 0.2s;
     display: block;
+    text-align: center;
   }
-  .cta-btn:hover { background: #dfc080; }
+  .cta-btn:hover { opacity: 0.85; }
   #shopify-buy-btn-wrapper { margin-top: 0; }
   #shopify-buy-btn-wrapper .shopify-buy__btn-wrapper { width: 100%; }
   #shopify-buy-btn-wrapper .shopify-buy__btn {
     width: 100% !important;
     padding: 20px !important;
-    background: var(--gold) !important;
-    color: #080808 !important;
+    background: linear-gradient(90deg, #1a40d0, #8010c0) !important;
+    color: #fff !important;
     border: none !important;
     border-radius: 0 !important;
     font-size: 10px !important;
@@ -626,10 +668,10 @@
     text-transform: uppercase !important;
     font-family: 'DM Mono', monospace !important;
     font-weight: 400 !important;
-    transition: background 0.2s !important;
+    transition: opacity 0.2s !important;
     box-shadow: none !important;
   }
-  #shopify-buy-btn-wrapper .shopify-buy__btn:hover { background: #dfc080 !important; }
+  #shopify-buy-btn-wrapper .shopify-buy__btn:hover { opacity: 0.85 !important; }
   #shopify-buy-btn-wrapper .shopify-buy__cart-toggle { display: none !important; }
   .guarantee {
     font-size: 9px;
@@ -638,14 +680,14 @@
     letter-spacing: 1.5px;
     font-family: var(--mono);
     text-transform: uppercase;
-    padding: 16px 0;
+    padding: 14px 0;
     border-bottom: 0.5px solid var(--border);
   }
 
   /* FOOTER */
   footer {
     background: var(--bg-2);
-    padding: 48px 80px;
+    padding: 40px 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -655,7 +697,11 @@
     font-family: var(--mono);
     font-size: 14px;
     letter-spacing: 6px;
-    color: var(--text-muted);
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-indent: 6px;
   }
   .footer-links { display: flex; gap: 32px; }
   .footer-links a {
@@ -667,7 +713,7 @@
     font-family: var(--mono);
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--text-muted); }
+  .footer-links a:hover { color: var(--moon); }
   .footer-copy {
     font-size: 9px;
     color: var(--text-dim);
@@ -676,32 +722,24 @@
   }
 
   /* ANIMATIONS */
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; } }
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
-
   .reveal {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
-    nav { padding: 18px 24px; }
+    nav { padding: 0 24px; }
     .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; }
-    .hero-left { padding: 60px 24px 40px; border-right: none; border-bottom: 0.5px solid var(--border); }
+    .hero-left { padding: 60px 24px 40px; border-right: none; border-bottom: 1px solid var(--border); }
     .hero-right { min-height: 50vh; padding: 48px 24px; }
     .section { padding: 80px 24px; }
     .ingr-grid { grid-template-columns: 1fr; }
@@ -732,38 +770,129 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Nootropic drink mix · Lunar Frost · Formula 01</p>
-    <h1 class="hero-title">Your mind<br>is a<br><span class="accent">liability.</span></h1>
+    <p class="hero-eyebrow">Nootropic drink mix · Formula 01 · Clinical doses</p>
+    <h1 class="hero-title">Think<br>clearly.<br>Act<br>decisively.</h1>
     <div class="hero-divider"></div>
-    <p class="hero-desc">Most men operate at 60% cognitive capacity. They call it normal. Seven clinically dosed ingredients. Zero proprietary blends. Zero excuses. SERO changes the ratio.</p>
+    <p class="hero-desc">Seven clinically dosed ingredients. Zero proprietary blends. Zero fairy dust. The stack most brands won't tell you about — because it actually works.</p>
     <div class="hero-actions">
       <a href="#order" class="btn-primary">Get SERO — $39</a>
       <a href="#formula" class="btn-ghost">See the formula</a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="tub-wrap">
-      <div class="tub-shadow"></div>
-      <div class="tub-lid">
-        <div class="tub-lid-rim"></div>
-      </div>
-      <div class="tub-body">
-        <div class="tub-label">
-          <div class="tub-label-brand">SERO</div>
-          <div class="tub-label-line"></div>
-          <div class="tub-label-sub">Cognitive Performance</div>
-          <div class="tub-label-flavor">Nootropic Drink Mix</div>
-          <div class="tub-label-tagline">Your mind is the asset.</div>
-          <div class="tub-label-line"></div>
-          <div class="tub-label-ings">
-            Alpha GPC · Inositol · L-Theanine<br>
-            Natural Caffeine · Ginseng · BioPerine
-          </div>
-          <div class="tub-label-flavor" style="margin-top:4px;color:#333">20 SERVINGS · LUNAR FROST</div>
-        </div>
-      </div>
-      <div class="tub-bottom"></div>
-    </div>
+    <svg width="300" height="340" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gBody" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ddd8f5"/>
+          <stop offset="18%" stop-color="#f5f3ff"/>
+          <stop offset="50%" stop-color="#ffffff"/>
+          <stop offset="82%" stop-color="#f0eeff"/>
+          <stop offset="100%" stop-color="#d8d4f0"/>
+        </linearGradient>
+        <linearGradient id="gLid" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#1a1820"/>
+          <stop offset="40%" stop-color="#2e2a3a"/>
+          <stop offset="60%" stop-color="#2e2a3a"/>
+          <stop offset="100%" stop-color="#1a1820"/>
+        </linearGradient>
+        <linearGradient id="gLidTop" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3a3650"/>
+          <stop offset="100%" stop-color="#1a1828"/>
+        </linearGradient>
+        <linearGradient id="gBase" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#b8b4d0"/>
+          <stop offset="40%" stop-color="#e8e4ff"/>
+          <stop offset="60%" stop-color="#e8e4ff"/>
+          <stop offset="100%" stop-color="#b8b4d0"/>
+        </linearGradient>
+        <linearGradient id="gText" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#1a40d0"/>
+          <stop offset="100%" stop-color="#8010c0"/>
+        </linearGradient>
+        <linearGradient id="gRule" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#1a40d0"/>
+          <stop offset="100%" stop-color="#8010c0"/>
+        </linearGradient>
+        <linearGradient id="gShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#6040c0" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#6040c0" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="fs">
+          <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#5030a0" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+
+      <!-- Ground shadow -->
+      <ellipse cx="150" cy="326" rx="105" ry="10" fill="url(#gShadow)"/>
+
+      <!-- BASE RIM -->
+      <rect x="28" y="292" width="244" height="22" rx="0" fill="url(#gBase)"/>
+      <ellipse cx="150" cy="292" rx="122" ry="12" fill="#ccc8e8"/>
+      <ellipse cx="150" cy="314" rx="122" ry="12" fill="#b8b4d0"/>
+
+      <!-- BODY -->
+      <g filter="url(#fs)">
+        <rect x="28" y="80" width="244" height="214" fill="url(#gBody)"/>
+        <!-- Edge shadows for 3D cylinder effect -->
+        <rect x="28" y="80" width="22" height="214" fill="url(#gBody)" opacity="0.5"/>
+        <rect x="250" y="80" width="22" height="214" fill="url(#gBody)" opacity="0.5"/>
+      </g>
+
+      <!-- LABEL AREA (white rounded rect on body) -->
+      <rect x="44" y="96" width="212" height="192" rx="8" fill="white" opacity="0.88"/>
+      <rect x="44" y="96" width="212" height="192" rx="8" fill="none" stroke="#e0d8ff" stroke-width="0.8"/>
+
+      <!-- SERO text -->
+      <text x="150" y="128" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="400" font-size="13" letter-spacing="7" fill="url(#gText)">SERO</text>
+
+      <!-- Gradient rule -->
+      <rect x="90" y="136" width="120" height="1.5" rx="1" fill="url(#gRule)"/>
+
+      <!-- Nootropic -->
+      <text x="150" y="170" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="28" fill="#0f0a20">Nootropic</text>
+
+      <!-- Drink Mix -->
+      <text x="150" y="196" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="300" font-size="22" fill="#1a1030">Drink Mix</text>
+
+      <!-- Flavor badge -->
+      <rect x="90" y="205" width="120" height="20" rx="10" fill="none" stroke="url(#gRule)" stroke-width="1.2"/>
+      <text x="150" y="219" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="400" font-size="8.5" letter-spacing="2" fill="url(#gText)">NOOTROPIC FORMULA</text>
+
+      <!-- Divider -->
+      <line x1="80" y1="232" x2="220" y2="232" stroke="#e8e4f8" stroke-width="0.8"/>
+
+      <!-- Stats row -->
+      <text x="100" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="14" fill="url(#gText)">7</text>
+      <text x="100" y="262" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="0.5" fill="#9080c0">COMPOUNDS</text>
+
+      <line x1="133" y1="243" x2="133" y2="264" stroke="#e0d8ff" stroke-width="0.8"/>
+
+      <text x="150" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="14" fill="url(#gText)">20</text>
+      <text x="150" y="262" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="0.5" fill="#9080c0">SERVINGS</text>
+
+      <line x1="167" y1="243" x2="167" y2="264" stroke="#e0d8ff" stroke-width="0.8"/>
+
+      <text x="200" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="14" fill="url(#gText)">100%</text>
+      <text x="200" y="262" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="0.5" fill="#9080c0">DOSED</text>
+
+      <!-- Small info -->
+      <text x="150" y="277" text-anchor="middle" font-family="'Inter',sans-serif" font-size="8" fill="#b0a0d0">7.5g per scoop · 2 scoops per serving</text>
+      <text x="150" y="288" text-anchor="middle" font-family="'Inter',sans-serif" font-size="7" fill="#c8b8e8">Dietary Supplement</text>
+
+      <!-- LID SIDE -->
+      <rect x="28" y="52" width="244" height="30" fill="url(#gLid)"/>
+
+      <!-- LID TOP ELLIPSE -->
+      <ellipse cx="150" cy="52" rx="122" ry="18" fill="url(#gLidTop)"/>
+      <!-- Lid top highlight -->
+      <ellipse cx="150" cy="50" rx="100" ry="12" fill="none" stroke="#4a4060" stroke-width="0.5" opacity="0.5"/>
+      <!-- Lid inner ring -->
+      <ellipse cx="150" cy="52" rx="80" ry="10" fill="none" stroke="#3a3050" stroke-width="0.5"/>
+
+      <!-- Body top ellipse -->
+      <ellipse cx="150" cy="82" rx="122" ry="12" fill="#d8d4f0"/>
+      <ellipse cx="150" cy="80" rx="122" ry="12" fill="#e8e4ff"/>
+    </svg>
     <div class="hero-stat-row">
       <div class="hero-stat">
         <span class="hero-stat-num">7</span>
@@ -810,9 +939,9 @@
   <div class="section-header reveal">
     <div>
       <p class="section-num">01 — Formula</p>
-      <h2 class="section-title">Every ingredient<br>has a <span class="accent">reason.</span></h2>
+      <h2 class="section-title">Every ingredient<br>has a reason.</h2>
     </div>
-    <p class="section-sub">Full doses. Full transparency. The stack most brands won't tell you about.</p>
+    <p class="section-sub">Full doses. Full transparency. No proprietary blends.</p>
   </div>
   <div class="ingr-grid reveal">
     <div class="ingr-card">
@@ -851,7 +980,7 @@
       <div class="ingr-line"></div>
       <p class="ingr-benefit">BioPerine. Increases bioavailability of every other ingredient in the stack by up to 20x. Small dose, massive effect.</p>
     </div>
-    <div class="ingr-card" style="grid-column: span 3; border-bottom:none; border-right:none">
+    <div class="ingr-card" style="grid-column:span 3;border-bottom:none;border-right:none">
       <p class="ingr-dose">Full RDA</p>
       <h3 class="ingr-name">B Vitamins (B3 · B6 · B12)</h3>
       <div class="ingr-line"></div>
@@ -862,10 +991,10 @@
 
 <!-- HOW IT WORKS -->
 <section class="how-section" id="science">
-  <div class="section-header reveal" style="border-bottom-color: var(--border);">
+  <div class="section-header reveal">
     <div>
       <p class="section-num">02 — Science</p>
-      <h2 class="section-title">How it <span class="accent">works</span></h2>
+      <h2 class="section-title">How it works</h2>
     </div>
     <p class="section-sub">Designed to work in layers — immediate, sustained, and compounding.</p>
   </div>
@@ -874,25 +1003,25 @@
       <p class="how-step-num">00 — 20 min</p>
       <div class="how-step-bar"></div>
       <h3 class="how-step-title">Caffeine + Theanine activate</h3>
-      <p class="how-step-desc">Clean energy from green tea kicks in. Alpha waves rise. Sharp and calm — not wired.</p>
+      <p class="how-step-desc">Clean energy kicks in. Alpha waves rise. Sharp and calm — not wired.</p>
     </div>
     <div class="how-step">
       <p class="how-step-num">30 — 60 min</p>
       <div class="how-step-bar"></div>
       <h3 class="how-step-title">Alpha GPC elevates focus</h3>
-      <p class="how-step-desc">Acetylcholine rises. Deep work becomes easier. BioPerine maximises absorption across the stack.</p>
+      <p class="how-step-desc">Acetylcholine rises. Deep work becomes easier. BioPerine maximises absorption.</p>
     </div>
     <div class="how-step">
       <p class="how-step-num">2 — 4 hours</p>
       <div class="how-step-bar"></div>
       <h3 class="how-step-title">Inositol holds the line</h3>
-      <p class="how-step-desc">Stress stays managed. Serotonin signalling stays smooth. No 2pm crash, no mental fog.</p>
+      <p class="how-step-desc">Stress stays managed. No 2pm crash, no mental fog.</p>
     </div>
     <div class="how-step" style="border-right:none">
       <p class="how-step-num">Daily use</p>
       <div class="how-step-bar"></div>
       <h3 class="how-step-title">Ginseng compounds</h3>
-      <p class="how-step-desc">Cerebral blood flow improves. Cognitive output builds. More effective the longer you run it.</p>
+      <p class="how-step-desc">Cerebral blood flow improves. More effective the longer you run it.</p>
     </div>
   </div>
 </section>
@@ -902,7 +1031,7 @@
   <div class="section-header reveal">
     <div>
       <p class="section-num">03 — Reviews</p>
-      <h2 class="section-title">What they're<br><span class="accent">saying.</span></h2>
+      <h2 class="section-title">What they're saying.</h2>
     </div>
   </div>
   <div class="testi-grid reveal">
@@ -924,11 +1053,11 @@
   </div>
 </section>
 
-<!-- ORDER CTA -->
+<!-- ORDER -->
 <section class="cta-section" id="order">
   <div class="cta-left reveal">
     <p class="section-num">04 — Order</p>
-    <h2 class="section-title">Your brain<br>is the asset.<br><span class="accent">Treat it<br>like one.</span></h2>
+    <h2 class="section-title">Your brain<br>is the asset.<br>Treat it<br>like one.</h2>
   </div>
   <div class="cta-right reveal">
     <div class="price-display">
@@ -936,7 +1065,7 @@
       <span class="price-sub">USD · 20 servings</span>
     </div>
     <div class="product-meta">
-      <div class="meta-row"><span class="meta-label">Flavour</span><span class="meta-val">Lunar Frost</span></div>
+      <div class="meta-row"><span class="meta-label">Flavour</span><span class="meta-val">Select at checkout</span></div>
       <div class="meta-row"><span class="meta-label">Servings</span><span class="meta-val">20 · ~$1.95/day</span></div>
       <div class="meta-row"><span class="meta-label">Fulfillment</span><span class="meta-val">Ships from US · 3–5 days</span></div>
       <div class="meta-row"><span class="meta-label">Shipping</span><span class="meta-val">Free over $60 USD</span></div>
