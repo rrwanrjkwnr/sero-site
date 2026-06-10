@@ -9,749 +9,195 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #ffffff;
-    --bg-2: #f6f4ff;
-    --bg-3: #eeeaff;
-    --border: #e8e4f8;
-    --border-dark: #d0c8f0;
-    --text: #0f0a20;
-    --text-muted: #3a2870;
-    --text-dim: #9080c0;
-    --accent: #1a40d0;
-    --moon: #7010b0;
-    --font: 'Inter', system-ui, sans-serif;
-    --mono: 'DM Mono', monospace;
-    --grad: linear-gradient(90deg, #1a40d0, #8010c0);
+    --bg:#ffffff; --bg-2:#f6f4ff; --bg-3:#eeeaff;
+    --border:#e8e4f8; --border-dark:#d0c8f0;
+    --text:#0f0a20; --text-muted:#3a2870; --text-dim:#9080c0;
+    --accent:#1040d0; --moon:#d020a0;
+    --font:'Inter',system-ui,sans-serif; --mono:'DM Mono',monospace;
+    --grad:linear-gradient(90deg,#e040b8,#1040d0);
+    --c1:#e040b8; --c2:#1040d0;
+    --hero-bg:#13182a;
+    transition: background 0.5s, color 0.5s;
+  }
+  body.grape {
+    --bg:#fdf5ff; --bg-2:#f8eeff; --bg-3:#f0dfff;
+    --border:#e8d4f8; --border-dark:#d4b8f0;
+    --text:#1a0a20; --text-muted:#4a1860; --text-dim:#a060c0;
+    --accent:#5500cc; --moon:#ff0070;
+    --grad:linear-gradient(90deg,#6600cc,#ff0070);
+    --c1:#6600cc; --c2:#ff0070;
+    --hero-bg:#100815;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font);
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-  .hero-right {
-    background-image: radial-gradient(ellipse at 60% 40%, rgba(100,60,220,0.05) 0%, transparent 70%);
-  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:300;overflow-x:hidden;transition:background 0.7s ease,color 0.7s ease}
+  .nav-logo,.hero-title,.section-num,.ingr-dose,.price-big,.footer-logo,.btn-primary,.nav-cta,.hero-stat-num,.ingr-line,.ingr-chip,.how-step-bar::after,.star,.cta-btn,.marquee-wrap{transition:background 0.7s ease,color 0.7s ease,border-color 0.7s ease}
 
   /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 60px;
-    height: 56px;
-    background: rgba(255,255,255,0.94);
-    backdrop-filter: blur(16px);
-    border-bottom: 0.5px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 8px;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-    text-indent: 8px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-decoration: none;
-    font-family: var(--mono);
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--moon); }
-  .nav-cta {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 8px 20px;
-    border: none;
-    background: var(--grad);
-    color: #fff;
-    cursor: pointer;
-    text-decoration: none;
-    font-family: var(--mono);
-    transition: opacity 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; }
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:56px;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border)}
+  body.grape nav{background:rgba(253,245,255,0.94)}
+  .nav-logo{font-family:var(--mono);font-size:14px;letter-spacing:8px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;text-indent:8px}
+  .nav-links{display:flex;gap:40px;list-style:none}
+  .nav-links a{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-dim);text-decoration:none;font-family:var(--mono);transition:color 0.2s}
+  .nav-links a:hover{color:var(--moon)}
+  .nav-cta{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;border:none;background:var(--grad);color:#fff;cursor:pointer;text-decoration:none;font-family:var(--mono);transition:opacity 0.2s}
+  .nav-cta:hover{opacity:0.85}
 
   /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 56px;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px 80px 80px;
-    border-right: 0.5px solid var(--border);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 40px;
-    font-family: var(--mono);
-  }
-  .hero-title {
-    font-size: clamp(56px, 7vw, 92px);
-    font-weight: 700;
-    line-height: 0.92;
-    letter-spacing: -3px;
-    margin-bottom: 40px;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-divider {
-    width: 40px;
-    height: 2px;
-    background: var(--grad);
-    margin-bottom: 32px;
-    border: none;
-  }
-  .hero-desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    max-width: 400px;
-    margin-bottom: 48px;
-    font-weight: 300;
-  }
-  .hero-actions { display: flex; gap: 16px; align-items: center; }
-  .btn-primary {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    padding: 16px 32px;
-    background: var(--grad);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-family: var(--mono);
-    font-weight: 400;
-    transition: opacity 0.2s;
-  }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-ghost {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-decoration: none;
-    border-bottom: 0.5px solid var(--border-dark);
-    padding-bottom: 2px;
-    font-family: var(--mono);
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .btn-ghost:hover { color: var(--moon); border-color: var(--moon); }
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:56px;border-bottom:0.5px solid var(--border)}
+  .hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 60px 80px 80px;border-right:0.5px solid var(--border);opacity:0;transform:translateY(20px);animation:fadeUp 0.8s ease forwards 0.2s}
+  .hero-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--text-dim);margin-bottom:40px;font-family:var(--mono)}
+  .hero-title{font-size:clamp(56px,7vw,92px);font-weight:700;line-height:0.92;letter-spacing:-3px;margin-bottom:40px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero-divider{width:40px;height:2px;background:var(--grad);margin-bottom:32px;border:none}
+  .hero-desc{font-size:14px;color:var(--text-muted);line-height:1.8;max-width:400px;margin-bottom:48px;font-weight:300}
+  .hero-actions{display:flex;gap:16px;align-items:center}
+  .btn-primary{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;padding:16px 32px;background:var(--grad);color:#fff;border:none;cursor:pointer;text-decoration:none;display:inline-block;font-family:var(--mono);font-weight:400;transition:opacity 0.2s}
+  .btn-primary:hover{opacity:0.85}
+  .btn-ghost{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);text-decoration:none;border-bottom:0.5px solid var(--border-dark);padding-bottom:2px;font-family:var(--mono);transition:color 0.2s,border-color 0.2s}
+  .btn-ghost:hover{color:var(--moon);border-color:var(--moon)}
 
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    background: #1a1828;
-    padding: 60px 40px;
-    opacity: 0;
-    animation: fadeIn 1s ease forwards 0.4s;
-  }
+  /* HERO RIGHT - TUB */
+  .hero-right{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:var(--hero-bg);padding:60px 40px;opacity:0;animation:fadeIn 1s ease forwards 0.4s;transition:background 0.5s}
+  .product-gallery{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+  .gallery-main{width:280px;height:280px;overflow:hidden;background:transparent}
+  .gallery-main img{width:100%;height:100%;object-fit:contain;display:block;transition:opacity 0.3s}
+  .gallery-thumbs{display:flex;gap:8px}
+  .gallery-thumb{width:56px;height:56px;object-fit:contain;cursor:pointer;opacity:0.45;border:0.5px solid transparent;transition:opacity 0.2s,border-color 0.2s;padding:2px}
+  .gallery-thumb.active,.gallery-thumb:hover{opacity:1;border-color:var(--border)}
 
-  /* TUB VISUAL */
-  .tub-wrap {
-    position: relative;
-    width: 210px;
-    height: 265px;
-  }
-  .tub-shadow {
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 170px;
-    height: 20px;
-    background: radial-gradient(ellipse, rgba(80,40,180,0.18) 0%, rgba(0,0,0,0) 70%);
-    border-radius: 50%;
-  }
-  .tub-lid {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 52px;
-    background: linear-gradient(120deg, #ece8ff 0%, #f5f3ff 50%, #e8e4ff 100%);
-    border-radius: 50% 50% 48% 48% / 40% 40% 22% 22%;
-    border: 0.5px solid #c8c0f0;
-    box-shadow: 0 3px 16px rgba(100,60,200,0.18), inset 0 1px 0 rgba(255,255,255,0.8);
-  }
-  .tub-lid::after {
-    content: 'SERO';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 6px;
-    background: linear-gradient(90deg, #1a40d0, #8010c0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-indent: 6px;
-  }
-  .tub-lid-rim {
-    position: absolute;
-    bottom: -7px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 14px;
-    background: linear-gradient(120deg, #d8d0f8 0%, #ece8ff 100%);
-    border-radius: 0 0 50% 50% / 0 0 80% 80%;
-    border: 0.5px solid #c0b8e8;
-    border-top: none;
-    box-shadow: 0 3px 8px rgba(100,60,200,0.12);
-  }
-  .tub-body {
-    position: absolute;
-    top: 44px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(160deg, #f8f6ff 0%, #ffffff 50%, #f4f0ff 100%);
-    border-radius: 4px 4px 50% 50% / 4px 4px 22px 22px;
-    border: 0.5px solid #d0c8f0;
-    box-shadow: 0 4px 24px rgba(100,60,200,0.14), inset -8px 0 20px rgba(200,180,255,0.12);
-    overflow: hidden;
-  }
-  .tub-label {
-    position: absolute;
-    top: 8px;
-    left: 10px;
-    right: 10px;
-    bottom: 24px;
-    background: rgba(255,255,255,0.7);
-    border: 0.5px solid rgba(160,130,240,0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-  }
-  .tub-label-brand {
-    font-family: 'Inter', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 8px;
-    background: linear-gradient(90deg, #1a40d0, #8010c0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-indent: 8px;
-    line-height: 1;
-  }
-  .tub-label-line {
-    width: 70%;
-    height: 0.5px;
-    background: linear-gradient(90deg, #2050e0, #9020c0);
-    margin: 3px 0;
-    opacity: 0.4;
-  }
-  .tub-label-sub {
-    font-family: 'DM Mono', monospace;
-    font-size: 5.5px;
-    letter-spacing: 3px;
-    color: #5040a0;
-    text-transform: uppercase;
-  }
-  .tub-label-flavor {
-    font-family: 'DM Mono', monospace;
-    font-size: 4.8px;
-    letter-spacing: 2px;
-    color: #9080c0;
-    text-transform: uppercase;
-  }
-  .tub-label-tagline {
-    font-family: 'Inter', sans-serif;
-    font-size: 5px;
-    color: #a090c8;
-    margin-top: 2px;
-    font-style: italic;
-  }
-  .tub-label-ings {
-    font-family: 'DM Mono', monospace;
-    font-size: 4.5px;
-    letter-spacing: 0.8px;
-    color: #c0b0e0;
-    text-align: center;
-    line-height: 1.8;
-  }
-  .tub-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 22px;
-    background: linear-gradient(90deg, #d8d0f8, #ece8ff);
-    border-radius: 50%;
-    border: 0.5px solid #c8c0f0;
-  }
+  /* FLAVOR SELECTOR */
+  .flavor-selector{display:flex;align-items:center;gap:16px}
+  .flavor-arrow{width:32px;height:32px;border:0.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-size:14px;transition:all 0.2s;font-family:var(--mono);flex-shrink:0;user-select:none}
+  .flavor-arrow:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.12);color:#fff}
+  .flavor-info{text-align:center;min-width:130px}
+  .flavor-name{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;display:block;margin-bottom:4px}
+  .flavor-dots{display:flex;gap:6px;justify-content:center}
+  .flavor-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);transition:background 0.3s}
+  .flavor-dot.active{background:#fff}
 
-  .hero-stat-row {
-    display: flex;
-    width: 100%;
-    border: 0.5px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .hero-stat {
-    text-align: center;
-    flex: 1;
-    padding: 18px 12px;
-    border-right: 0.5px solid var(--border);
-    background: var(--bg);
-  }
-  .hero-stat:last-child { border-right: none; }
-  .hero-stat-num {
-    font-size: 22px;
-    font-weight: 700;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: block;
-    font-family: var(--mono);
-    letter-spacing: -0.5px;
-  }
-  .hero-stat-label {
-    font-size: 8px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    font-family: var(--mono);
-    margin-top: 4px;
-    display: block;
-  }
+  /* HERO STATS */
+  .hero-stat-row{display:flex;width:100%;max-width:320px;border:0.5px solid rgba(255,255,255,0.1);overflow:hidden}
+  .hero-stat{text-align:center;flex:1;padding:16px 12px;border-right:0.5px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)}
+  .hero-stat:last-child{border-right:none}
+  .hero-stat-num{font-size:22px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;font-family:var(--mono);letter-spacing:-0.5px}
+  .hero-stat-label{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);font-family:var(--mono);margin-top:4px;display:block}
 
   /* MARQUEE */
-  .marquee-wrap {
-    background: var(--grad);
-    border-top: none;
-    border-bottom: none;
-    padding: 12px 0;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeIn 0.8s ease forwards 0.8s;
-  }
-  .marquee-track {
-    display: flex;
-    white-space: nowrap;
-    animation: marquee 26s linear infinite;
-  }
-  .marquee-track span {
-    font-size: 9px;
-    letter-spacing: 3.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    padding: 0 28px;
-    font-family: var(--mono);
-  }
-  .marquee-track span.dot { color: rgba(255,255,255,0.35); padding: 0; }
+  .marquee-wrap{background:var(--grad);padding:12px 0;overflow:hidden;opacity:0;animation:fadeIn 0.8s ease forwards 0.8s}
+  .marquee-track{display:flex;white-space:nowrap;animation:marquee 26s linear infinite}
+  .marquee-track span{font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,0.75);padding:0 28px;font-family:var(--mono)}
+  .marquee-track span.dot{color:rgba(255,255,255,0.35);padding:0}
 
   /* SECTIONS */
-  .section { padding: 120px 80px; border-bottom: 0.5px solid var(--border); }
-  .section-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 64px;
-    padding-bottom: 32px;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .section-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 3px;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-  }
-  .section-title {
-    font-size: clamp(32px, 4.5vw, 52px);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -1.5px;
-    color: var(--text);
-  }
-  .section-sub {
-    font-size: 11px;
-    color: var(--text-dim);
-    max-width: 260px;
-    line-height: 1.7;
-    text-align: right;
-    font-family: var(--mono);
-    letter-spacing: 0.5px;
-  }
+  .section{padding:120px 80px;border-bottom:0.5px solid var(--border)}
+  .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px;padding-bottom:32px;border-bottom:0.5px solid var(--border)}
+  .section-num{font-family:var(--mono);font-size:10px;letter-spacing:3px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;text-transform:uppercase}
+  .section-title{font-size:clamp(32px,4.5vw,52px);font-weight:700;line-height:1.05;letter-spacing:-1.5px;color:var(--text)}
+  .section-sub{font-size:11px;color:var(--text-dim);max-width:260px;line-height:1.7;text-align:right;font-family:var(--mono);letter-spacing:0.5px}
 
-  /* INGREDIENTS */
-  .ingr-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 0.5px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .ingr-card {
-    padding: 36px;
-    border-right: 0.5px solid var(--border);
-    border-bottom: 0.5px solid var(--border);
-    transition: background 0.2s;
-    cursor: default;
-    background: var(--bg);
-  }
-  .ingr-card:hover { background: var(--bg-2); }
-  .ingr-dose {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 2px;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    display: inline-block;
-  }
-  .ingr-name {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-  .ingr-line {
-    width: 28px; height: 2px;
-    background: var(--grad);
-    margin: 14px 0;
-    border: none;
-  }
-  .ingr-benefit {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.65;
-  }
+  /* INGREDIENT CHIPS */
+  .ingr-chips-row{display:flex;gap:10px;margin-bottom:48px}
+  .ingr-chip{flex:1;height:80px;position:relative;overflow:hidden;border:0.5px solid rgba(255,255,255,0.35);cursor:default;transition:transform 0.18s,box-shadow 0.18s}
+  .ingr-chip:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.35)}
+  .ingr-chip-bg{position:absolute;inset:0}
+  .ingr-chip:nth-child(1) .ingr-chip-bg{background:linear-gradient(135deg,#1838d8,#8800d0)}
+  .ingr-chip:nth-child(2) .ingr-chip-bg{background:linear-gradient(135deg,#8800d0,#dd20aa)}
+  .ingr-chip:nth-child(3) .ingr-chip-bg{background:linear-gradient(135deg,#dd20aa,#00b8ff)}
+  .ingr-chip:nth-child(4) .ingr-chip-bg{background:linear-gradient(135deg,#1040e0,#cc00ff)}
+  .ingr-chip:nth-child(5) .ingr-chip-bg{background:linear-gradient(135deg,#cc00ff,#00d4e8)}
+  .ingr-chip:nth-child(6) .ingr-chip-bg{background:linear-gradient(135deg,#00d4e8,#2222cc)}
+  .ingr-chip:nth-child(7) .ingr-chip-bg{background:linear-gradient(135deg,#3300cc,#ff2090)}
+  .ingr-chip::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.28) 0%,transparent 55%);pointer-events:none}
+  .ingr-chip-gloss{position:absolute;left:0;right:0;top:0;height:38%;background:linear-gradient(to bottom,rgba(255,255,255,0.18),rgba(255,255,255,0.04));pointer-events:none;z-index:2}
+  .ingr-chip-stripes{position:absolute;inset:0;z-index:1;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.08) 0px,rgba(255,255,255,0.08) 1.5px,transparent 1.5px,transparent 10px);pointer-events:none}
+  .ingr-chip-text{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+  .ingr-chip-dose{font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;line-height:1}
+  .ingr-chip-name{font-size:10px;font-weight:400;color:rgba(255,255,255,0.85);letter-spacing:0.3px;line-height:1}
+
+  /* INGREDIENT CARDS */
+  .ingr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border)}
+  .ingr-card{padding:28px 24px;background:var(--bg);transition:background 0.2s;cursor:default}
+  .ingr-card:hover{background:var(--bg-2)}
+  .ingr-dose{font-family:var(--mono);font-size:10px;letter-spacing:2px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;text-transform:uppercase;display:inline-block}
+  .ingr-name{font-size:16px;font-weight:600;margin-bottom:4px;color:var(--text);letter-spacing:-0.3px}
+  .ingr-line{width:24px;height:1.5px;background:var(--grad);margin:10px 0;border:none}
+  .ingr-benefit{font-size:11.5px;color:var(--text-muted);line-height:1.65}
 
   /* HOW IT WORKS */
-  .how-section {
-    background: var(--bg-2);
-    padding: 120px 80px;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .how-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 0.5px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .how-step {
-    padding: 36px 28px;
-    border-right: 0.5px solid var(--border);
-    background: var(--bg);
-  }
-  .how-step:last-child { border-right: none; }
-  .how-step-num {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    color: var(--text-dim);
-    margin-bottom: 28px;
-    text-transform: uppercase;
-  }
-  .how-step-bar {
-    width: 100%;
-    height: 3px;
-    background: var(--border);
-    margin-bottom: 28px;
-    position: relative;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .how-step-bar::after {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    background: var(--grad);
-    border-radius: 2px;
-  }
-  .how-step:nth-child(1) .how-step-bar::after { width: 25%; }
-  .how-step:nth-child(2) .how-step-bar::after { width: 50%; }
-  .how-step:nth-child(3) .how-step-bar::after { width: 75%; }
-  .how-step:nth-child(4) .how-step-bar::after { width: 100%; }
-  .how-step-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-  .how-step-desc {
-    font-size: 11px;
-    color: var(--text-dim);
-    line-height: 1.7;
-    font-family: var(--mono);
-  }
+  .how-section{background:var(--bg-2);padding:120px 80px;border-bottom:0.5px solid var(--border)}
+  .how-grid{display:grid;grid-template-columns:repeat(4,1fr);border:0.5px solid var(--border);border-radius:8px;overflow:hidden}
+  .how-step{padding:36px 28px;border-right:0.5px solid var(--border);background:var(--bg)}
+  .how-step:last-child{border-right:none}
+  .how-step-num{font-family:var(--mono);font-size:9px;letter-spacing:2.5px;color:var(--text-dim);margin-bottom:28px;text-transform:uppercase}
+  .how-step-bar{width:100%;height:3px;background:var(--border);margin-bottom:28px;position:relative;border-radius:2px;overflow:hidden}
+  .how-step-bar::after{content:'';position:absolute;left:0;top:0;bottom:0;background:var(--grad);border-radius:2px}
+  .how-step:nth-child(1) .how-step-bar::after{width:25%}
+  .how-step:nth-child(2) .how-step-bar::after{width:50%}
+  .how-step:nth-child(3) .how-step-bar::after{width:75%}
+  .how-step:nth-child(4) .how-step-bar::after{width:100%}
+  .how-step-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.3}
+  .how-step-desc{font-size:11px;color:var(--text-dim);line-height:1.7;font-family:var(--mono)}
 
   /* TESTIMONIALS */
-  .testi-section {
-    padding: 120px 80px;
-    border-bottom: 0.5px solid var(--border);
-    background: var(--bg);
-  }
-  .testi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 0.5px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .testi-card {
-    padding: 36px;
-    border-right: 0.5px solid var(--border);
-    background: var(--bg-2);
-  }
-  .testi-card:last-child { border-right: none; }
-  .testi-stars {
-    display: flex;
-    gap: 3px;
-    margin-bottom: 20px;
-  }
-  .star {
-    width: 8px; height: 8px;
-    background: var(--grad);
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  }
-  .testi-quote {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.7;
-    margin-bottom: 24px;
-    color: var(--text-muted);
-  }
-  .testi-author {
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    font-family: var(--mono);
-  }
+  .testi-section{padding:120px 80px;border-bottom:0.5px solid var(--border);background:var(--bg)}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);border:0.5px solid var(--border);border-radius:8px;overflow:hidden}
+  .testi-card{padding:36px;border-right:0.5px solid var(--border);background:var(--bg-2)}
+  .testi-card:last-child{border-right:none}
+  .testi-stars{display:flex;gap:3px;margin-bottom:20px}
+  .star{width:8px;height:8px;background:var(--grad);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+  .testi-quote{font-size:14px;font-weight:300;line-height:1.7;margin-bottom:24px;color:var(--text-muted)}
+  .testi-author{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-dim);font-family:var(--mono)}
 
   /* CTA */
-  .cta-section {
-    padding: 120px 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .cta-left .section-title { font-size: clamp(36px, 5vw, 60px); }
-  .cta-right { display: flex; flex-direction: column; }
-  .price-display {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    padding-bottom: 24px;
-    border-bottom: 0.5px solid var(--border-dark);
-  }
-  .price-big {
-    font-size: 52px;
-    font-weight: 700;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -2px;
-    font-family: var(--mono);
-  }
-  .price-sub {
-    font-size: 11px;
-    color: var(--text-dim);
-    font-family: var(--mono);
-    letter-spacing: 1px;
-  }
-  .product-meta { display: flex; flex-direction: column; }
-  .meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px 0;
-    border-bottom: 0.5px solid var(--border);
-    font-size: 12px;
-  }
-  .meta-label {
-    color: var(--text-dim);
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .meta-val {
-    color: var(--text-muted);
-    font-family: var(--mono);
-    font-size: 11px;
-  }
-  .cta-btn {
-    width: 100%;
-    padding: 20px;
-    background: linear-gradient(90deg, #1a40d0, #8010c0);
-    color: #fff;
-    border: none;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: var(--mono);
-    font-weight: 400;
-    transition: opacity 0.2s;
-    display: block;
-    text-align: center;
-  }
-  .cta-btn:hover { opacity: 0.85; }
-  #shopify-buy-btn-wrapper { margin-top: 0; }
-  #shopify-buy-btn-wrapper .shopify-buy__btn-wrapper { width: 100%; }
-  #shopify-buy-btn-wrapper .shopify-buy__btn {
-    width: 100% !important;
-    padding: 20px !important;
-    background: linear-gradient(90deg, #1a40d0, #8010c0) !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: 0 !important;
-    font-size: 10px !important;
-    letter-spacing: 3px !important;
-    text-transform: uppercase !important;
-    font-family: 'DM Mono', monospace !important;
-    font-weight: 400 !important;
-    transition: opacity 0.2s !important;
-    box-shadow: none !important;
-  }
-  #shopify-buy-btn-wrapper .shopify-buy__btn:hover { opacity: 0.85 !important; }
-  #shopify-buy-btn-wrapper .shopify-buy__cart-toggle { display: none !important; }
-  .guarantee {
-    font-size: 9px;
-    color: var(--text-dim);
-    text-align: center;
-    letter-spacing: 1.5px;
-    font-family: var(--mono);
-    text-transform: uppercase;
-    padding: 14px 0;
-    border-bottom: 0.5px solid var(--border);
-  }
+  .cta-section{padding:120px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;border-bottom:0.5px solid var(--border)}
+  .cta-left .section-title{font-size:clamp(36px,5vw,60px)}
+  .cta-right{display:flex;flex-direction:column}
+  .price-display{display:flex;align-items:baseline;gap:10px;padding-bottom:24px;border-bottom:0.5px solid var(--border-dark)}
+  .price-big{font-size:52px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-2px;font-family:var(--mono)}
+  .price-sub{font-size:11px;color:var(--text-dim);font-family:var(--mono);letter-spacing:1px}
+  .product-meta{display:flex;flex-direction:column}
+  .meta-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+  .meta-label{color:var(--text-dim);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+  .meta-val{color:var(--text-muted);font-family:var(--mono);font-size:11px}
+  .cta-btn{width:100%;padding:20px;background:var(--grad);color:#fff;border:none;font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:var(--mono);font-weight:400;transition:opacity 0.2s;display:block;text-align:center;text-decoration:none}
+  .cta-btn:hover{opacity:0.85}
+  .guarantee{font-size:9px;color:var(--text-dim);text-align:center;letter-spacing:1.5px;font-family:var(--mono);text-transform:uppercase;padding:14px 0;border-bottom:0.5px solid var(--border)}
 
   /* FOOTER */
-  footer {
-    background: var(--bg-2);
-    padding: 40px 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 0.5px solid var(--border);
-  }
-  .footer-logo {
-    font-family: var(--mono);
-    font-size: 14px;
-    letter-spacing: 6px;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-indent: 6px;
-  }
-  .footer-links { display: flex; gap: 32px; }
-  .footer-links a {
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    text-decoration: none;
-    font-family: var(--mono);
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--moon); }
-  .footer-copy {
-    font-size: 9px;
-    color: var(--text-dim);
-    font-family: var(--mono);
-    letter-spacing: 1px;
-  }
+  footer{background:var(--bg-2);padding:40px 80px;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid var(--border)}
+  .footer-logo{font-family:var(--mono);font-size:14px;letter-spacing:6px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-indent:6px}
+  .footer-links{display:flex;gap:32px}
+  .footer-links a{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);text-decoration:none;font-family:var(--mono);transition:color 0.2s}
+  .footer-links a:hover{color:var(--moon)}
+  .footer-copy{font-size:9px;color:var(--text-dim);font-family:var(--mono);letter-spacing:1px}
 
   /* ANIMATIONS */
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { to { opacity: 1; } }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{to{opacity:1}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
 
-  @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { padding: 60px 24px 40px; border-right: none; border-bottom: 1px solid var(--border); }
-    .hero-right { min-height: 50vh; padding: 48px 24px; }
-    .section { padding: 80px 24px; }
-    .ingr-grid { grid-template-columns: 1fr; }
-    .how-section { padding: 80px 24px; }
-    .how-grid { grid-template-columns: 1fr 1fr; }
-    .testi-section { padding: 80px 24px; }
-    .testi-grid { grid-template-columns: 1fr; }
-    .cta-section { padding: 80px 24px; grid-template-columns: 1fr; }
-    footer { padding: 36px 24px; flex-direction: column; gap: 24px; text-align: center; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .section-sub { text-align: left; }
+  @media(max-width:768px){
+    nav{padding:0 24px}
+    .nav-links{display:none}
+    .hero{grid-template-columns:1fr}
+    .hero-left{padding:60px 24px 40px;border-right:none;border-bottom:1px solid var(--border)}
+    .hero-right{min-height:60vh;padding:48px 24px}
+    .section{padding:80px 24px}
+    .ingr-chips-row{flex-wrap:wrap}
+    .ingr-chip{flex:1 1 calc(50% - 5px);min-width:120px}
+    .ingr-grid{grid-template-columns:1fr 1fr}
+    .how-section{padding:80px 24px}
+    .how-grid{grid-template-columns:1fr 1fr}
+    .testi-section{padding:80px 24px}
+    .testi-grid{grid-template-columns:1fr}
+    .cta-section{padding:80px 24px;grid-template-columns:1fr}
+    footer{padding:36px 24px;flex-direction:column;gap:24px;text-align:center}
+    .footer-links{flex-wrap:wrap;justify-content:center}
+    .section-header{flex-direction:column;align-items:flex-start;gap:16px}
+    .section-sub{text-align:left}
   }
 </style>
 </head>
@@ -775,124 +221,217 @@
     <div class="hero-divider"></div>
     <p class="hero-desc">Seven clinically dosed ingredients. Zero proprietary blends. Zero fairy dust. The stack most brands won't tell you about — because it actually works.</p>
     <div class="hero-actions">
-      <a href="#order" class="btn-primary">Get SERO — $39</a>
+      <a href="#order" class="btn-primary">Get SERO — $47</a>
       <a href="#formula" class="btn-ghost">See the formula</a>
     </div>
   </div>
   <div class="hero-right">
-    <svg width="300" height="340" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
+    <!-- PRODUCT PHOTO GALLERY -->
+    <div class="product-gallery" id="product-gallery">
+      <div class="gallery-main">
+        <img id="gallery-main-img" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/1reg_800x800.jpg?v=1781071180" alt="SERO Focus — Lunar Frost" loading="eager"/>
+      </div>
+      <div class="gallery-thumbs">
+        <img class="gallery-thumb active" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/1reg_800x800.jpg?v=1781071180" alt="Front" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/1spill_800x800.jpg?v=1781071181" alt="With powder" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/2reg_800x800.jpg?v=1781071180" alt="Two tubs" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/2spill_800x800.jpg?v=1781071181" alt="Two tubs with powder" onclick="setGalleryImg(this)"/>
+      </div>
+    </div>
+    <!-- HIDDEN SVG (kept for JS compatibility) -->
+    <svg id="tub-svg" width="0" height="0" viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg" style="display:none">
       <defs>
-        <linearGradient id="gBody" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#ddd8f5"/>
-          <stop offset="18%" stop-color="#f5f3ff"/>
-          <stop offset="50%" stop-color="#ffffff"/>
-          <stop offset="82%" stop-color="#f0eeff"/>
-          <stop offset="100%" stop-color="#d8d4f0"/>
+        <!-- FLAVOUR GRADIENTS: Lunar Frost (default) -->
+        <linearGradient id="gHolo" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#ff80c0"/>
+          <stop offset="20%"  stop-color="#f060d0"/>
+          <stop offset="38%"  stop-color="#b050ff"/>
+          <stop offset="52%"  stop-color="#7070ff"/>
+          <stop offset="68%"  stop-color="#2090ff"/>
+          <stop offset="84%"  stop-color="#00b8ff"/>
+          <stop offset="100%" stop-color="#00d0f0"/>
         </linearGradient>
+        <!-- Body cylinder shading (left/right edges dark) -->
+        <linearGradient id="gBodyShade" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#000" stop-opacity="0.45"/>
+          <stop offset="8%"   stop-color="#000" stop-opacity="0.10"/>
+          <stop offset="50%"  stop-color="#fff" stop-opacity="0.08"/>
+          <stop offset="92%"  stop-color="#000" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+        </linearGradient>
+        <!-- Top holo ellipse -->
+        <linearGradient id="gHoloTop" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#f060c0"/>
+          <stop offset="50%"  stop-color="#8060ff"/>
+          <stop offset="100%" stop-color="#00b8ff"/>
+        </linearGradient>
+        <!-- White label strip -->
+        <linearGradient id="gLabel" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#000" stop-opacity="0.18"/>
+          <stop offset="6%"   stop-color="#000" stop-opacity="0"/>
+          <stop offset="94%"  stop-color="#000" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0.18"/>
+        </linearGradient>
+        <!-- Black lid -->
         <linearGradient id="gLid" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#1a1820"/>
-          <stop offset="40%" stop-color="#2e2a3a"/>
-          <stop offset="60%" stop-color="#2e2a3a"/>
-          <stop offset="100%" stop-color="#1a1820"/>
+          <stop offset="0%"   stop-color="#0a0a0a"/>
+          <stop offset="15%"  stop-color="#2a2a2a"/>
+          <stop offset="50%"  stop-color="#323232"/>
+          <stop offset="85%"  stop-color="#2a2a2a"/>
+          <stop offset="100%" stop-color="#0a0a0a"/>
         </linearGradient>
-        <linearGradient id="gLidTop" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#3a3650"/>
-          <stop offset="100%" stop-color="#1a1828"/>
+        <linearGradient id="gLidTop" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#111"/>
+          <stop offset="35%"  stop-color="#3a3a3a"/>
+          <stop offset="50%"  stop-color="#444"/>
+          <stop offset="65%"  stop-color="#3a3a3a"/>
+          <stop offset="100%" stop-color="#111"/>
         </linearGradient>
-        <linearGradient id="gBase" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#b8b4d0"/>
-          <stop offset="40%" stop-color="#e8e4ff"/>
-          <stop offset="60%" stop-color="#e8e4ff"/>
-          <stop offset="100%" stop-color="#b8b4d0"/>
+        <!-- Silver base -->
+        <linearGradient id="gSilver" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#606070"/>
+          <stop offset="20%"  stop-color="#b8b8c8"/>
+          <stop offset="50%"  stop-color="#e0e0ee"/>
+          <stop offset="80%"  stop-color="#b8b8c8"/>
+          <stop offset="100%" stop-color="#606070"/>
         </linearGradient>
+        <!-- Text gradient (matches theme) -->
         <linearGradient id="gText" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#1a40d0"/>
-          <stop offset="100%" stop-color="#8010c0"/>
+          <stop id="gTextC1" offset="0%"   stop-color="#e040b8"/>
+          <stop id="gTextC2" offset="100%" stop-color="#1040d0"/>
         </linearGradient>
-        <linearGradient id="gRule" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#1a40d0"/>
-          <stop offset="100%" stop-color="#8010c0"/>
-        </linearGradient>
-        <linearGradient id="gShadow" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#6040c0" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#6040c0" stop-opacity="0"/>
-        </linearGradient>
-        <filter id="fs">
-          <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#5030a0" flood-opacity="0.3"/>
+        <!-- Drop shadow -->
+        <filter id="fShadow" x="-20%" y="-10%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#1a0a40" flood-opacity="0.5"/>
         </filter>
+        <!-- Micro stripe pattern -->
+        <pattern id="pStripe" x="0" y="0" width="8" height="1" patternUnits="userSpaceOnUse">
+          <rect width="1.5" height="1" fill="white" opacity="0.07"/>
+        </pattern>
+        <!-- Tub silhouette clip -->
+        <clipPath id="cTub">
+          <rect x="18" y="58" width="224" height="244" rx="2"/>
+        </clipPath>
+        <!-- Label strip clip -->
+        <clipPath id="cLabel">
+          <rect x="18" y="216" width="224" height="86"/>
+        </clipPath>
+        <!-- Ground shadow -->
+        <radialGradient id="gGround" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#3020a0" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#3020a0" stop-opacity="0"/>
+        </radialGradient>
       </defs>
 
       <!-- Ground shadow -->
-      <ellipse cx="150" cy="326" rx="105" ry="10" fill="url(#gShadow)"/>
+      <ellipse cx="130" cy="326" rx="95" ry="9" fill="url(#gGround)"/>
 
-      <!-- BASE RIM -->
-      <rect x="28" y="292" width="244" height="22" rx="0" fill="url(#gBase)"/>
-      <ellipse cx="150" cy="292" rx="122" ry="12" fill="#ccc8e8"/>
-      <ellipse cx="150" cy="314" rx="122" ry="12" fill="#b8b4d0"/>
+      <!-- Ground shadow -->
+      <ellipse cx="130" cy="326" rx="95" ry="9" fill="url(#gGround)"/>
 
-      <!-- BODY -->
-      <g filter="url(#fs)">
-        <rect x="28" y="80" width="244" height="214" fill="url(#gBody)"/>
-        <!-- Edge shadows for 3D cylinder effect -->
-        <rect x="28" y="80" width="22" height="214" fill="url(#gBody)" opacity="0.5"/>
-        <rect x="250" y="80" width="22" height="214" fill="url(#gBody)" opacity="0.5"/>
+      <!-- ── SILVER BASE ── -->
+      <rect x="18" y="294" width="224" height="10" fill="url(#gSilver)"/>
+      <ellipse cx="130" cy="294" rx="112" ry="10" fill="#c8c8d8"/>
+      <ellipse cx="130" cy="304" rx="112" ry="10" fill="#585868"/>
+
+      <!-- ── WHITE TUB BODY ── -->
+      <g filter="url(#fShadow)">
+        <rect x="18" y="58" width="224" height="238" fill="white"/>
+        <!-- cylinder edge shading on white body -->
+        <rect x="18" y="58" width="224" height="238" fill="url(#gBodyShade)"/>
       </g>
+      <!-- White body top ellipse -->
+      <ellipse cx="130" cy="58" rx="112" ry="10" fill="#f0eeff"/>
+      <ellipse cx="130" cy="57" rx="110" ry="8"  fill="white" opacity="0.7"/>
 
-      <!-- LABEL AREA (white rounded rect on body) -->
-      <rect x="44" y="96" width="212" height="192" rx="8" fill="white" opacity="0.88"/>
-      <rect x="44" y="96" width="212" height="192" rx="8" fill="none" stroke="#e0d8ff" stroke-width="0.8"/>
+      <!-- ══ LABEL (sits on white body, y=78 to y=294) ══ -->
+      <!-- Label clip: arc top, arc bottom, following cylinder -->
+      <!-- ARC direction: sweep=0 = counter-clockwise = bows UPWARD at top edge (correct for cylinder) -->
 
-      <!-- SERO text -->
-      <text x="150" y="128" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="400" font-size="13" letter-spacing="7" fill="url(#gText)">SERO</text>
+      <!-- HOLO GRADIENT BODY of label — starts right below lid rim -->
+      <path d="M18,76 A112,8 0 0 0 242,76 L242,220 A112,6 0 0 1 18,220 Z" fill="url(#gHolo)"/>
+      <!-- subtle edge darkening only (not full body shade which washes out the holo) -->
+      <path d="M18,76 A112,8 0 0 0 242,76 L242,220 A112,6 0 0 1 18,220 Z" fill="url(#pStripe)"/>
+      <!-- left edge shadow -->
+      <path d="M18,76 A112,8 0 0 0 50,72 L50,220 A112,6 0 0 1 18,220 Z" fill="rgba(0,0,0,0.22)"/>
+      <!-- right edge shadow -->
+      <path d="M210,72 A112,8 0 0 0 242,76 L242,220 A112,6 0 0 1 210,220 Z" fill="rgba(0,0,0,0.22)"/>
+      <!-- top edge gloss -->
+      <path d="M18,76 A112,8 0 0 0 242,76" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
 
-      <!-- Gradient rule -->
-      <rect x="90" y="136" width="120" height="1.5" rx="1" fill="url(#gRule)"/>
+      <!-- SERO logo box -->
+      <rect x="28" y="88" width="58" height="52" rx="3" fill="rgba(0,0,0,0.55)"/>
+      <text x="57" y="109" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="9" letter-spacing="2.5" fill="white">SERO</text>
+      <rect x="37" y="114" width="40" height="0.8" fill="white" opacity="0.35"/>
+      <text x="57" y="125" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5.5" letter-spacing="1" fill="rgba(255,255,255,0.55)">FOCUS</text>
+      <text x="57" y="134" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5" letter-spacing="0.8" fill="rgba(255,255,255,0.3)">FORMULA 01</text>
 
-      <!-- Nootropic -->
-      <text x="150" y="170" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="28" fill="#0f0a20">Nootropic</text>
+      <!-- Flavour name large -->
+      <text id="tub-flavor-text" x="158" y="133" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="17" letter-spacing="2" fill="white">LUNAR FROST</text>
+      <text x="158" y="145" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5.5" letter-spacing="2" fill="rgba(255,255,255,0.5)">NOOTROPIC DRINK MIX</text>
 
-      <!-- Drink Mix -->
-      <text x="150" y="196" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="300" font-size="22" fill="#1a1030">Drink Mix</text>
+      <!-- Badges -->
+      <rect x="100" y="153" width="38" height="13" rx="2" fill="rgba(0,0,0,0.45)"/>
+      <text x="119" y="163" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5.5" fill="white" letter-spacing="0.5">COGNITION</text>
+      <rect x="142" y="153" width="40" height="13" rx="2" fill="rgba(255,255,255,0.18)"/>
+      <text x="162" y="163" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5.5" fill="white" letter-spacing="0.5">ZERO SUGAR</text>
 
-      <!-- Flavor badge -->
-      <rect x="90" y="205" width="120" height="20" rx="10" fill="none" stroke="url(#gRule)" stroke-width="1.2"/>
-      <text x="150" y="219" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="400" font-size="8.5" letter-spacing="2" fill="url(#gText)">NOOTROPIC FORMULA</text>
+      <!-- 20 SERVINGS bottom-right of holo -->
+      <text x="220" y="212" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6" letter-spacing="1" fill="rgba(255,255,255,0.65)">20 SERVINGS</text>
 
-      <!-- Divider -->
-      <line x1="80" y1="232" x2="220" y2="232" stroke="#e8e4f8" stroke-width="0.8"/>
+      <!-- WHITE STRIP -->
+      <path d="M18,220 A112,6 0 0 0 242,220 L242,294 A112,6 0 0 1 18,294 Z" fill="white"/>
+      <path d="M18,220 A112,6 0 0 0 242,220 L242,294 A112,6 0 0 1 18,294 Z" fill="url(#gBodyShade)" opacity="0.25"/>
+      <path d="M18,220 A112,6 0 0 0 242,220" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"/>
 
-      <!-- Stats row -->
-      <text x="100" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="14" fill="url(#gText)">7</text>
-      <text x="100" y="262" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="0.5" fill="#9080c0">COMPOUNDS</text>
+      <!-- WHAT'S INSIDE -->
+      <text x="26" y="234" font-family="'DM Mono',monospace" font-weight="700" font-size="6" letter-spacing="2" fill="#111">WHAT'S INSIDE</text>
+      <line x1="26" y1="238" x2="234" y2="238" stroke="#e0e0e0" stroke-width="0.5"/>
 
-      <line x1="133" y1="243" x2="133" y2="264" stroke="#e0d8ff" stroke-width="0.8"/>
+      <!-- Ingredient chips — 7 equal chips -->
+      <rect x="26"  y="242" width="29" height="15" fill="url(#gHolo)"/>
+      <rect x="57"  y="242" width="29" height="15" fill="url(#gHolo)"/>
+      <rect x="88"  y="242" width="29" height="15" fill="url(#gHolo)"/>
+      <rect x="119" y="242" width="29" height="15" fill="url(#gHolo)"/>
+      <rect x="150" y="242" width="29" height="15" fill="url(#gHolo)"/>
+      <rect x="181" y="242" width="27" height="15" fill="url(#gHolo)"/>
+      <rect x="210" y="242" width="24" height="15" fill="url(#gHolo)"/>
+      <text x="40"  y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">300mg</text>
+      <text x="71"  y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">600mg</text>
+      <text x="102" y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">200mg</text>
+      <text x="133" y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">100mg</text>
+      <text x="164" y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">1000mg</text>
+      <text x="194" y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">50mg</text>
+      <text x="222" y="253" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.2" fill="white">5mg</text>
 
-      <text x="150" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="14" fill="url(#gText)">20</text>
-      <text x="150" y="262" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="0.5" fill="#9080c0">SERVINGS</text>
+      <!-- Benefit tagline -->
+      <text x="130" y="272" text-anchor="middle" font-family="'DM Mono',monospace" font-size="4.8" letter-spacing="0.8" fill="#9080b0">BLOOD FLOW · FOCUS · CALM ENERGY · ABSORPTION</text>
 
-      <line x1="167" y1="243" x2="167" y2="264" stroke="#e0d8ff" stroke-width="0.8"/>
+      <!-- BLACK BOTTOM BAR -->
+      <path d="M18,280 A112,5 0 0 0 242,280 L242,294 A112,6 0 0 1 18,294 Z" fill="#111111"/>
 
-      <text x="200" y="252" text-anchor="middle" font-family="'DM Mono',monospace" font-weight="700" font-size="14" fill="url(#gText)">100%</text>
-      <text x="200" y="262" text-anchor="middle" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="0.5" fill="#9080c0">DOSED</text>
+      <!-- ── BLACK LID SIDE ── -->
+      <rect x="18" y="32" width="224" height="28" fill="url(#gLid)"/>
+      <rect x="18" y="48" width="224" height="3" fill="#151515"/>
+      <rect x="18" y="52" width="224" height="2" fill="#0d0d0d"/>
+      <rect x="18" y="55" width="224" height="1.5" fill="#1a1a1a"/>
 
-      <!-- Small info -->
-      <text x="150" y="277" text-anchor="middle" font-family="'Inter',sans-serif" font-size="8" fill="#b0a0d0">7.5g per scoop · 2 scoops per serving</text>
-      <text x="150" y="288" text-anchor="middle" font-family="'Inter',sans-serif" font-size="7" fill="#c8b8e8">Dietary Supplement</text>
-
-      <!-- LID SIDE -->
-      <rect x="28" y="52" width="244" height="30" fill="url(#gLid)"/>
-
-      <!-- LID TOP ELLIPSE -->
-      <ellipse cx="150" cy="52" rx="122" ry="18" fill="url(#gLidTop)"/>
-      <!-- Lid top highlight -->
-      <ellipse cx="150" cy="50" rx="100" ry="12" fill="none" stroke="#4a4060" stroke-width="0.5" opacity="0.5"/>
-      <!-- Lid inner ring -->
-      <ellipse cx="150" cy="52" rx="80" ry="10" fill="none" stroke="#3a3050" stroke-width="0.5"/>
-
-      <!-- Body top ellipse -->
-      <ellipse cx="150" cy="82" rx="122" ry="12" fill="#d8d4f0"/>
-      <ellipse cx="150" cy="80" rx="122" ry="12" fill="#e8e4ff"/>
+      <!-- ── LID TOP ── -->
+      <ellipse cx="130" cy="32" rx="112" ry="14" fill="url(#gLidTop)"/>
+      <ellipse cx="130" cy="30" rx="88"  ry="9"  fill="none" stroke="#3a3a3a" stroke-width="0.8"/>
+      <ellipse cx="130" cy="30" rx="52"  ry="6"  fill="none" stroke="#2a2a2a" stroke-width="0.6"/>
+      <ellipse cx="130" cy="30" rx="24"  ry="4"  fill="#2a2a2a"/>
+      <text x="130" y="33" text-anchor="middle" font-family="'DM Mono',monospace" font-size="5" letter-spacing="1.5" fill="rgba(255,255,255,0.3)">SERO</text>
     </svg>
+
+    <!-- FLAVOUR LABEL -->
+    <div class="flavor-selector">
+      <div class="flavor-info">
+        <span class="flavor-name" id="flavor-label">Lunar Frost</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
     <div class="hero-stat-row">
       <div class="hero-stat">
         <span class="hero-stat-num">7</span>
@@ -921,7 +460,7 @@
     <span>Black Pepper Extract 5mg</span><span class="dot">·</span>
     <span>B Vitamins</span><span class="dot">·</span>
     <span>No proprietary blends</span><span class="dot">·</span>
-    <span>Ships from US</span><span class="dot">·</span>
+    <span>Clinical doses</span><span class="dot">·</span>
     <span>Alpha GPC 300mg</span><span class="dot">·</span>
     <span>Inositol 600mg</span><span class="dot">·</span>
     <span>Natural Caffeine 200mg</span><span class="dot">·</span>
@@ -930,7 +469,7 @@
     <span>Black Pepper Extract 5mg</span><span class="dot">·</span>
     <span>B Vitamins</span><span class="dot">·</span>
     <span>No proprietary blends</span><span class="dot">·</span>
-    <span>Ships from US</span><span class="dot">·</span>
+    <span>Clinical doses</span><span class="dot">·</span>
   </div>
 </div>
 
@@ -943,49 +482,24 @@
     </div>
     <p class="section-sub">Full doses. Full transparency. No proprietary blends.</p>
   </div>
+  <div class="ingr-chips-row reveal">
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">300mg</span><span class="ingr-chip-name">Alpha GPC</span></div></div>
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">600mg</span><span class="ingr-chip-name">Inositol</span></div></div>
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">200mg</span><span class="ingr-chip-name">Caffeine</span></div></div>
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">100mg</span><span class="ingr-chip-name">L-Theanine</span></div></div>
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">1000mg</span><span class="ingr-chip-name">L-Arginine</span></div></div>
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">50mg</span><span class="ingr-chip-name">Ginseng</span></div></div>
+    <div class="ingr-chip"><div class="ingr-chip-bg"></div><div class="ingr-chip-stripes"></div><div class="ingr-chip-gloss"></div><div class="ingr-chip-text"><span class="ingr-chip-dose">5mg</span><span class="ingr-chip-name">BioPerine</span></div></div>
+  </div>
   <div class="ingr-grid reveal">
-    <div class="ingr-card">
-      <p class="ingr-dose">300mg</p>
-      <h3 class="ingr-name">Alpha GPC</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">Crosses the blood-brain barrier directly. Boosts acetylcholine — the neurotransmitter behind focus, memory, and learning speed.</p>
-    </div>
-    <div class="ingr-card">
-      <p class="ingr-dose">600mg</p>
-      <h3 class="ingr-name">Inositol</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">Rarely dosed this high in a nootropic. Supports stress resilience, serotonin signalling, and sustained mental clarity under pressure.</p>
-    </div>
-    <div class="ingr-card" style="border-right:none">
-      <p class="ingr-dose">200mg</p>
-      <h3 class="ingr-name">Natural Caffeine</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">Sourced from green tea. Slower absorption than synthetic caffeine — clean, sustained energy without the spike or crash.</p>
-    </div>
-    <div class="ingr-card">
-      <p class="ingr-dose">100mg</p>
-      <h3 class="ingr-name">L-Theanine</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">Pairs with caffeine to smooth the curve. Increases alpha wave activity — calm, locked-in attention with no edge or anxiety.</p>
-    </div>
-    <div class="ingr-card">
-      <p class="ingr-dose">50mg</p>
-      <h3 class="ingr-name">Asian Ginseng</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">Supports cognitive function under stress and improves cerebral blood flow. Keeps you sharp when it matters most.</p>
-    </div>
-    <div class="ingr-card" style="border-right:none">
-      <p class="ingr-dose">5mg</p>
-      <h3 class="ingr-name">Black Pepper Extract</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">BioPerine. Increases bioavailability of every other ingredient in the stack by up to 20x. Small dose, massive effect.</p>
-    </div>
-    <div class="ingr-card" style="grid-column:span 3;border-bottom:none;border-right:none">
-      <p class="ingr-dose">Full RDA</p>
-      <h3 class="ingr-name">B Vitamins (B3 · B6 · B12)</h3>
-      <div class="ingr-line"></div>
-      <p class="ingr-benefit">Essential cofactors for neurotransmitter synthesis and energy metabolism. Most people are deficient and don't know it. You won't be.</p>
-    </div>
+    <div class="ingr-card"><p class="ingr-dose">300mg</p><h3 class="ingr-name">Alpha GPC</h3><div class="ingr-line"></div><p class="ingr-benefit">Crosses the blood-brain barrier directly. Boosts acetylcholine — the neurotransmitter behind focus, memory, and learning speed.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">600mg</p><h3 class="ingr-name">Inositol</h3><div class="ingr-line"></div><p class="ingr-benefit">Rarely dosed this high in a nootropic. Supports stress resilience, serotonin signalling, and sustained mental clarity under pressure.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">200mg</p><h3 class="ingr-name">Natural Caffeine</h3><div class="ingr-line"></div><p class="ingr-benefit">Sourced from green tea. Slower absorption than synthetic caffeine — clean, sustained energy without the spike or crash.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">100mg</p><h3 class="ingr-name">L-Theanine</h3><div class="ingr-line"></div><p class="ingr-benefit">Pairs with caffeine to smooth the curve. Increases alpha wave activity — calm, locked-in attention with no edge or anxiety.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">1000mg</p><h3 class="ingr-name">L-Arginine HCl</h3><div class="ingr-line"></div><p class="ingr-benefit">Precursor to nitric oxide. Enhances cerebral blood flow, supporting oxygen and nutrient delivery to the brain.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">50mg</p><h3 class="ingr-name">Asian Ginseng</h3><div class="ingr-line"></div><p class="ingr-benefit">Supports cognitive function under stress and improves cerebral blood flow. Keeps you sharp when it matters most.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">5mg</p><h3 class="ingr-name">Black Pepper Extract</h3><div class="ingr-line"></div><p class="ingr-benefit">BioPerine. Increases bioavailability of every other ingredient in the stack by up to 20x. Small dose, massive effect.</p></div>
+    <div class="ingr-card"><p class="ingr-dose">Full RDA</p><h3 class="ingr-name">B Vitamins</h3><div class="ingr-line"></div><p class="ingr-benefit">Essential cofactors for neurotransmitter synthesis and energy metabolism. Most people are deficient and don't know it.</p></div>
   </div>
 </section>
 
@@ -1017,11 +531,11 @@
       <h3 class="how-step-title">Inositol holds the line</h3>
       <p class="how-step-desc">Stress stays managed. No 2pm crash, no mental fog.</p>
     </div>
-    <div class="how-step" style="border-right:none">
-      <p class="how-step-num">Daily use</p>
+    <div class="how-step">
+      <p class="how-step-num">4 — 8 hours</p>
       <div class="how-step-bar"></div>
-      <h3 class="how-step-title">Ginseng compounds</h3>
-      <p class="how-step-desc">Cerebral blood flow improves. More effective the longer you run it.</p>
+      <h3 class="how-step-title">L-Arginine sustains flow</h3>
+      <p class="how-step-desc">Cerebral blood flow stays elevated. Ginseng keeps adaptation strong.</p>
     </div>
   </div>
 </section>
@@ -1031,24 +545,25 @@
   <div class="section-header reveal">
     <div>
       <p class="section-num">03 — Reviews</p>
-      <h2 class="section-title">What they're saying.</h2>
+      <h2 class="section-title">What people<br>are saying.</h2>
     </div>
+    <p class="section-sub">Real feedback from people who actually use it.</p>
   </div>
   <div class="testi-grid reveal">
     <div class="testi-card">
       <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-      <p class="testi-quote">"I've tried every nootropic stack out there. SERO is the first one where I actually notice a real difference by week two."</p>
-      <p class="testi-author">Jake M. — New York</p>
+      <p class="testi-quote">"First nootropic that actually delivered on the focus claims. The caffeine + theanine combo hits differently — zero jitters, just locked in."</p>
+      <p class="testi-author">Marcus T. — Software Engineer</p>
     </div>
     <div class="testi-card">
       <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-      <p class="testi-quote">"The fact that they show every dose is what sold me. Most brands hide everything in proprietary blends. SERO doesn't."</p>
-      <p class="testi-author">Marcus T. — Los Angeles</p>
+      <p class="testi-quote">"I've tried everything. SERO is the only stack where I can actually feel each ingredient pulling its weight. The transparency matters to me."</p>
+      <p class="testi-author">Priya S. — Medical Student</p>
     </div>
-    <div class="testi-card" style="border-right:none">
+    <div class="testi-card">
       <div class="testi-stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-      <p class="testi-quote">"My morning output has genuinely changed. Coffee alone was never going to do what SERO does."</p>
-      <p class="testi-author">Ryan K. — Chicago</p>
+      <p class="testi-quote">"Replaced my morning coffee entirely. Smoother energy, better recall, no crash at 3pm. I'm not going back."</p>
+      <p class="testi-author">James R. — Founder</p>
     </div>
   </div>
 </section>
@@ -1057,68 +572,147 @@
 <section class="cta-section" id="order">
   <div class="cta-left reveal">
     <p class="section-num">04 — Order</p>
-    <h2 class="section-title">Your brain<br>is the asset.<br>Treat it<br>like one.</h2>
+    <h2 class="section-title">Ready to<br>perform?</h2>
+    <div class="hero-divider" style="margin-top:32px"></div>
+    <p class="hero-desc" style="margin-bottom:0">One formula. No filler. No compromises. This is what a properly made nootropic looks like.</p>
   </div>
   <div class="cta-right reveal">
     <div class="price-display">
-      <span class="price-big">$39</span>
-      <span class="price-sub">USD · 20 servings</span>
+      <span class="price-big">$47</span>
+      <span class="price-sub">/ 20 servings · $2.35 per serve</span>
     </div>
     <div class="product-meta">
-      <div class="meta-row"><span class="meta-label">Flavour</span><span class="meta-val">Select at checkout</span></div>
-      <div class="meta-row"><span class="meta-label">Servings</span><span class="meta-val">20 · ~$1.95/day</span></div>
-      <div class="meta-row"><span class="meta-label">Fulfillment</span><span class="meta-val">Ships from US · 3–5 days</span></div>
-      <div class="meta-row"><span class="meta-label">Shipping</span><span class="meta-val">Free over $60 USD</span></div>
+      <div class="meta-row"><span class="meta-label">Format</span><span class="meta-val">Drink Mix (powder)</span></div>
+      <div class="meta-row"><span class="meta-label">Servings</span><span class="meta-val">20 per tub</span></div>
+      <div class="meta-row"><span class="meta-label">Flavour</span><span class="meta-val" id="order-flavor">Lunar Frost</span></div>
+      <div class="meta-row"><span class="meta-label">Formula</span><span class="meta-val">01 — Clinical</span></div>
     </div>
-    <div id="shopify-buy-btn-wrapper">
-      <div id='product-component-1780905710905'></div>
-      <a href="https://gzn7wn-pe.myshopify.com" id="fallback-buy-btn" class="cta-btn" style="display:block;text-align:center;text-decoration:none;">Add to Cart — $39</a>
-    </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var shopifyDiv = document.getElementById('product-component-1780905710905');
-        var fallback = document.getElementById('fallback-buy-btn');
-        var check = setInterval(function() {
-          if (shopifyDiv && shopifyDiv.children.length > 0) {
-            fallback.style.display = 'none';
-            clearInterval(check);
+    <div id="product-component-1781071483213" style="margin-top:24px"></div>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+    (function () {
+      var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+      if (window.ShopifyBuy) {
+        if (window.ShopifyBuy.UI) {
+          ShopifyBuyInit();
+        } else {
+          loadScript();
+        }
+      } else {
+        loadScript();
+      }
+      function loadScript() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = scriptURL;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+        script.onload = ShopifyBuyInit;
+      }
+      function ShopifyBuyInit() {
+        var client = ShopifyBuy.buildClient({
+          domain: 'gzn7wn-pe.myshopify.com',
+          storefrontAccessToken: '636624b7b1a72fd0cb8dc5a366929844',
+        });
+        ShopifyBuy.UI.onReady(client).then(function (ui) {
+          ui.createComponent('product', {
+            id: '9472078840067',
+            node: document.getElementById('product-component-1781071483213'),
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: {
+      "product": {
+        "styles": {
+          "product": {
+            "@media (min-width: 601px)": {
+              "max-width": "100%",
+              "margin-left": "0px",
+              "margin-bottom": "0px"
+            }
+          },
+          "button": {
+            "font-family": "monospace, sans-serif",
+            "font-weight": "400",
+            "font-size": "10px",
+            "letter-spacing": "3px",
+            "text-transform": "uppercase",
+               "width": "100%",
+            "padding": "20px",
+            ":hover": {
+              "background-color": "#1a0a2e",
+              "opacity": "0.85"
+            },
+            "background-color": "#3b1a6b",
+            ":focus": {
+              "background-color": "#1a0a2e"
+            },
+            "border-radius": "0px"
           }
-        }, 500);
-        setTimeout(function() { clearInterval(check); }, 6000);
-      });
+        },
+        "contents": {
+          "img": false,
+          "title": false,
+          "price": false
+        },
+        "text": {
+          "button": "Get SERO — $47"
+        }
+      },
+      "cart": {
+        "styles": {
+          "button": {
+            "font-family": "monospace, sans-serif",
+            "font-weight": "400",
+            "font-size": "10px",
+            "letter-spacing": "3px",
+            "text-transform": "uppercase",
+            "background-color": "#3b1a6b",
+            ":hover": {"background-color": "#1a0a2e"},
+            ":focus": {"background-color": "#1a0a2e"},
+            "border-radius": "0px"
+          }
+        },
+        "text": {
+          "total": "Subtotal",
+          "button": "Checkout"
+        }
+      },
+      "toggle": {
+        "styles": {
+          "toggle": {
+            "background-color": "#3b1a6b",
+            ":hover": {"background-color": "#1a0a2e"},
+            ":focus": {"background-color": "#1a0a2e"}
+          }
+        }
+      }
+    },
+          });
+        });
+      }
+    })();
+    /*]]>*/
     </script>
-    <p class="guarantee">30-day money back guarantee · No questions asked</p>
+    <p class="guarantee" style="margin-top:12px">30-day satisfaction guarantee · Secure checkout</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">SERO</div>
+  <span class="footer-logo">SERO</span>
   <div class="footer-links">
     <a href="#formula">Formula</a>
     <a href="#science">Science</a>
     <a href="#reviews">Reviews</a>
     <a href="#order">Order</a>
-    <a href="mailto:hello@serofocus.com">Contact</a>
   </div>
-  <p class="footer-copy">© 2025 SERO · All rights reserved</p>
+  <span class="footer-copy">&copy; 2025 SERO. All rights reserved.</span>
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function setGalleryImg(thumb) {
+  document.getElementById('gallery-main-img').src = thumb.src;
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
 </script>
-
 </body>
 </html>
