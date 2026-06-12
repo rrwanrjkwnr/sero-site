@@ -81,6 +81,9 @@
   .gallery-thumbs{display:flex;gap:10px}
   .gallery-thumb{width:64px;height:64px;object-fit:contain;cursor:pointer;opacity:0.6;border-radius:8px;border:1.5px solid transparent;background:#fff;transition:opacity 0.2s,border-color 0.2s;padding:4px}
   .gallery-thumb.active,.gallery-thumb:hover{opacity:1;border-color:rgba(180,140,255,0.9)}
+  .gallery-nav{display:flex;align-items:center;gap:10px}
+  .gallery-arrow{width:32px;height:32px;border:0.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-size:20px;transition:all 0.2s;flex-shrink:0;user-select:none;border-radius:6px;outline:none;line-height:1}
+  .gallery-arrow:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.12);color:#fff}
 
   /* FLAVOR SELECTOR */
   .flavor-selector{display:flex;align-items:center;gap:16px}
@@ -246,14 +249,18 @@
   <div class="hero-right">
     <!-- PRODUCT PHOTO GALLERY -->
     <div class="product-gallery" id="product-gallery">
-      <div class="gallery-main">
-        <img id="gallery-main-img" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/1reg_800x800.jpg?v=1781071180" alt="SERO Focus — Lunar Frost" loading="eager"/>
+      <div class="gallery-nav">
+        <button class="gallery-arrow" onclick="galleryPrev()">&#8249;</button>
+        <div class="gallery-main">
+          <img id="gallery-main-img" src="https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497243-generated-label-image-0.jpeg" alt="SERO Focus — Lunar Frost" loading="eager"/>
+        </div>
+        <button class="gallery-arrow" onclick="galleryNext()">&#8250;</button>
       </div>
       <div class="gallery-thumbs">
-        <img class="gallery-thumb active" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/1reg_800x800.jpg?v=1781071180" alt="Front" onclick="setGalleryImg(this)"/>
-        <img class="gallery-thumb" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/1spill_800x800.jpg?v=1781071181" alt="With powder" onclick="setGalleryImg(this)"/>
-        <img class="gallery-thumb" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/2reg_800x800.jpg?v=1781071180" alt="Two tubs" onclick="setGalleryImg(this)"/>
-        <img class="gallery-thumb" src="https://cdn.shopify.com/s/files/1/0824/3609/6259/files/2spill_800x800.jpg?v=1781071181" alt="Two tubs with powder" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb active" src="https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497243-generated-label-image-0.jpeg" alt="View 1" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb" src="https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497248-generated-label-image-1.jpeg" alt="View 2" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb" src="https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497228-generated-label-image-2.jpeg" alt="View 3" onclick="setGalleryImg(this)"/>
+        <img class="gallery-thumb" src="https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497232-generated-label-image-3.jpeg" alt="View 4" onclick="setGalleryImg(this)"/>
       </div>
     </div>
     <!-- HIDDEN SVG (kept for JS compatibility) -->
@@ -703,11 +710,29 @@ function selectBundle(n) {
   });
 }
 
-function setGalleryImg(thumb) {
-  document.getElementById('gallery-main-img').src = thumb.src;
-  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-  thumb.classList.add('active');
+const galleryImgs = [
+  'https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497243-generated-label-image-0.jpeg',
+  'https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497248-generated-label-image-1.jpeg',
+  'https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497228-generated-label-image-2.jpeg',
+  'https://storage.googleapis.com/supliful/users/files/409080ba-14a1-4a52-b06f-bf0a7aa88ba1/22c488fe-82e5-4dbb-b330-483d9c00c23f/1781246497232-generated-label-image-3.jpeg'
+];
+let galleryIndex = 0;
+
+function setGalleryIndex(i) {
+  galleryIndex = (i + galleryImgs.length) % galleryImgs.length;
+  document.getElementById('gallery-main-img').src = galleryImgs[galleryIndex];
+  document.querySelectorAll('.gallery-thumb').forEach((t, idx) => {
+    t.classList.toggle('active', idx === galleryIndex);
+  });
 }
+
+function setGalleryImg(thumb) {
+  const idx = Array.from(document.querySelectorAll('.gallery-thumb')).indexOf(thumb);
+  setGalleryIndex(idx);
+}
+
+function galleryNext() { setGalleryIndex(galleryIndex + 1); }
+function galleryPrev() { setGalleryIndex(galleryIndex - 1); }
 
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {
