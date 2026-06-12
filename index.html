@@ -239,7 +239,7 @@
     <div class="hero-divider"></div>
     <p class="hero-desc">Seven clinically dosed ingredients. Zero proprietary blends. Zero fairy dust. The stack most brands won't tell you about — because it actually works.</p>
     <div class="hero-actions">
-      <a href="#order" class="btn-primary">Get SERO — $59</a>
+      <a href="#order" class="btn-primary">Get SERO — $1.48/day</a>
       <a href="#formula" class="btn-ghost">See the formula</a>
     </div>
   </div>
@@ -660,9 +660,9 @@
       function ShopifyBuyInit() {
         var client = ShopifyBuy.buildClient({ domain: 'gzn7wn-pe.myshopify.com', storefrontAccessToken: '636624b7b1a72fd0cb8dc5a366929844' });
         ShopifyBuy.UI.onReady(client).then(function (ui) {
-          ui.createComponent('product', {id:'9475858432259',  node:document.getElementById('buy-btn-1'), moneyFormat:'%24%7B%7Bamount%7D%7D', options: makeOpts('Get SERO — $59')});
-          ui.createComponent('product', {id:'9475866820867', node:document.getElementById('buy-btn-2'), moneyFormat:'%24%7B%7Bamount%7D%7D', options: makeOpts('Get 2-Month Supply — $110')});
-          ui.createComponent('product', {id:'9475871179011', node:document.getElementById('buy-btn-3'), moneyFormat:'%24%7B%7Bamount%7D%7D', options: makeOpts('Get 3-Month Supply — $153')});
+          ui.createComponent('product', {id:'9475858432259',  node:document.getElementById('buy-btn-1'), moneyFormat:'%24%7B%7Bamount%7D%7D', options: makeOpts('Get SERO — $1.48/day')});
+          ui.createComponent('product', {id:'9475866820867', node:document.getElementById('buy-btn-2'), moneyFormat:'%24%7B%7Bamount%7D%7D', options: makeOpts('Get 2-Month Supply — $1.38/day')});
+          ui.createComponent('product', {id:'9475871179011', node:document.getElementById('buy-btn-3'), moneyFormat:'%24%7B%7Bamount%7D%7D', options: makeOpts('Get 3-Month Supply — $1.28/day')});
         });
       }
     })();
